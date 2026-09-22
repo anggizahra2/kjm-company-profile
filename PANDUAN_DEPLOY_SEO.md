@@ -20,7 +20,7 @@ Semua data contoh terpusat dan mudah diganti:
 2. **Email tujuan form kontak** — buka `backend/.env`, ganti `CONTACT_INBOX` dan `EMAIL_REPLY_TO` dengan email asli perusahaan (misal `info@perusahaanmu.co.id`). Tanpa ini, pesan dari form kontak tidak sampai ke kamu.
 3. **SEO dasar** — buka `frontend/public/index.html`:
    - Ganti `<title>`, `meta description`, `keywords` dengan nama perusahaan asli
-   - Ganti semua URL `https://b3-care-portal.preview.emergentagent.com` dengan domain aslimu nanti
+   - Ganti semua URL preview sementara dengan domain aslimu nanti
    - Ganti data di blok `application/ld+json` (alamat, telepon, sosial media)
 4. **Robots & Sitemap** — buka `frontend/public/robots.txt` dan `backend/.env` (`SITE_URL`), ganti domain dengan domain aslimu.
 5. **Konten berita & galeri** — login ke `/admin/login` lalu hapus konten contoh dan tambahkan berita & foto asli perusahaan.
@@ -30,9 +30,9 @@ Semua data contoh terpusat dan mudah diganti:
 
 ## BAGIAN 2 — Jalankan & Deploy Website
 
-### Opsi A — Deploy langsung dari Emergent (paling mudah)
-1. Klik tombol **Deploy** di dashboard Emergent.
-2. Website langsung online dengan URL permanen `https://namakamu.emergent.host` (atau serupa).
+### Opsi A — Deploy langsung dari platform (paling mudah)
+1. Klik tombol **Deploy** di dashboard platform tempat web ini dibangun.
+2. Website langsung online dengan URL permanen bawaan platform.
 3. Semua fitur (CMS admin, form kontak, galeri) langsung jalan.
 
 ### Opsi B — Hosting sendiri (Vercel + Render/Railway + MongoDB Atlas)
@@ -47,7 +47,7 @@ Semua data contoh terpusat dan mudah diganti:
 
 1. Beli domain di Niagahoster / IDWebhost / Cloudflare / GoDaddy (misal `nusaenvirolestari.co.id` — domain `.co.id` butuh dokumen SIU/NIB, `.com` langsung bisa).
 2. Arahkan DNS ke hostingmu:
-   - Emergent/Vercel: tambahkan domain di dashboard, lalu buat record `CNAME` sesuai petunjuk.
+   - Platform deploy/Vercel: tambahkan domain di dashboard, lalu buat record `CNAME` sesuai petunjuk.
 3. Setelah domain aktif, update semua URL di `index.html`, `robots.txt`, `SITE_URL` (backend .env) ke domain baru.
 
 ---
@@ -102,7 +102,7 @@ Semua data contoh terpusat dan mudah diganti:
 - Provider affordable: **Niagahoster, Hostinger, IDwebhost, Rumahweb**. Cukup beli domain saja — TIDAK perlu beli hosting di tempat yang sama.
 
 ### 2. Hosting / Deploy — pilih salah satu
-1. **Deploy via Emergent (paling mudah, direkomendasikan)**: klik tombol Deploy di dashboard Emergent — frontend + backend + database + HTTPS sudah termasuk, TIDAK perlu berlangganan hosting terpisah. Lalu sambungkan domain custom dari menu deploy.
+1. **Deploy via platform bawaan (paling mudah, direkomendasikan)**: klik tombol Deploy di dashboard platform — frontend + backend + database + HTTPS sudah termasuk, TIDAK perlu berlangganan hosting terpisah. Lalu sambungkan domain custom dari menu deploy.
 2. **Hemat terpisah (gratis)**: frontend di Vercel (gratis), backend di Render/Railway (free tier), database MongoDB Atlas (gratis 512MB). Caranya ada di Bagian 2 Opsi B — lebih hemat tapi perlu setup manual.
 3. **VPS** (Hostinger VPS / DigitalOcean / Vultr, ±Rp60–100rb/bulan): kontrol penuh tapi harus urus server sendiri — tidak disarankan tanpa admin server.
 

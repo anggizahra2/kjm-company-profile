@@ -9,7 +9,7 @@ export const COMPANY = {
   description:
     "PT Kaltara Jaya Makmur (KJM313) adalah perusahaan pengangkutan dan pengumpulan limbah B3 (Bahan Berbahaya dan Beracun) yang berizin resmi dari Kementerian Lingkungan Hidup, Kementerian Perhubungan, dan Dinas Lingkungan Hidup. Berbasis di Tarakan, Kalimantan Utara, kami melayani pengangkutan dan pengumpulan limbah B3 untuk industri di Kalimantan dan sekitarnya.",
   address:
-    "Jl. Perumnas RT. 02 No. 56, Kel. Kampung Empat, Kota Tarakan, Provinsi Kalimantan Utara",
+    "Jl. Rambutan No. 56, Kel. Kampung Empat, Kec. Tarakan Timur, Kota Tarakan, Kalimantan Utara",
   warehouse:
     "Jl. Amal Baru RT. 05, Kel. Pantai Amal, Kota Tarakan, Provinsi Kalimantan Utara",
   phone: "(0551) 31500",
@@ -195,6 +195,7 @@ export const ARMADA = [
   {
     id: "pickup",
     nama: "Pickup Bak Tertutup",
+    foto: "/images/armada-pickup.webp",
     jumlah: "2 Unit",
     kapasitas: "± 1 Ton",
     cocok: "Limbah B3 terkemas: aki/baterai bekas, kain majun, limbah klinis infeksius, produk farmasi kedaluwarsa",
@@ -203,6 +204,7 @@ export const ARMADA = [
   {
     id: "truk-box",
     nama: "Truk Bak Tertutup",
+    foto: "/images/armada-truk-box.webp",
     jumlah: "2 Unit",
     kapasitas: "± 5 Ton",
     cocok: "Drum limbah oli/solvent bekas, kemasan terkontaminasi, dan limbah padat terkemas volume besar",
@@ -211,6 +213,7 @@ export const ARMADA = [
   {
     id: "tangki",
     nama: "Truk Tangki",
+    foto: "/images/armada-tangki.webp",
     jumlah: "2 Unit",
     kapasitas: "± 5.000 Liter",
     cocok: "Limbah B3 cair: minyak pelumas bekas (hidrolik, mesin, gear, lubrikasi), sludge oil treatment",
@@ -219,6 +222,7 @@ export const ARMADA = [
   {
     id: "bak-terbuka",
     nama: "Truk Bak Terbuka",
+    foto: "/images/armada-bak-terbuka.webp",
     jumlah: "1 Unit",
     kapasitas: "± 5 Ton",
     cocok: "Limbah padat curah: bottom ash, fly ash, sludge, dan material curah terpilah",
@@ -227,6 +231,7 @@ export const ARMADA = [
   {
     id: "forklift",
     nama: "Forklift TPS",
+    foto: "/images/armada-forklift.webp",
     jumlah: "1 Unit",
     kapasitas: "± 3 Ton",
     cocok: "Pemindahan dan penataan drum/kemasan limbah B3 di area TPS KJM",

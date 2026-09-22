@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { SEO } from "@/components/SEO";
 import { Reveal, SectionLabel } from "@/components/Reveal";
+import { PageHero } from "@/components/PageHero";
 import { api, imgUrl } from "@/lib/api";
 import { useLang } from "@/context/LanguageContext";
 
@@ -37,16 +38,12 @@ export default function Galeri() {
         path="/galeri"
       />
 
-      <section className="bg-brand-950 grain-overlay relative py-20 lg:py-28">
-        <div className="max-w-7xl mx-auto px-5 lg:px-8">
-          <Reveal>
-            <SectionLabel>{t("Galeri", "Gallery")}</SectionLabel>
-            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1] text-white max-w-3xl">
-              {t("Armada & Fasilitas", "Fleet & Facilities")} <span className="text-brand-500">{t("Dalam Bingkai", "Framed")}</span>
-            </h1>
-          </Reveal>
-        </div>
-      </section>
+      <PageHero
+        label={t("Galeri", "Gallery")}
+        title={<>{t("Armada & Fasilitas", "Fleet & Facilities")} <span className="text-brand-500">{t("Dalam Bingkai", "Framed")}</span></>}
+        image="/images/page-galeri.webp"
+        testid="hero-galeri"
+      />
 
       <section className="py-20 lg:py-24">
         <div className="max-w-7xl mx-auto px-5 lg:px-8">

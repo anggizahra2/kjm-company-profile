@@ -1,6 +1,7 @@
 import { MapPin, Truck, Recycle, CheckCircle2 } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { Reveal, SectionLabel } from "@/components/Reveal";
+import { PageHero } from "@/components/PageHero";
 import { Marquee } from "@/components/Marquee";
 import { ArmadaTabs } from "@/components/ArmadaTabs";
 import { useLang } from "@/context/LanguageContext";
@@ -20,16 +21,12 @@ export default function Layanan() {
         path="/layanan"
       />
 
-      <section className="bg-brand-950 grain-overlay relative py-20 lg:py-28">
-        <div className="max-w-7xl mx-auto px-5 lg:px-8">
-          <Reveal>
-            <SectionLabel>{t("Armada & Layanan", "Fleet & Services")}</SectionLabel>
-            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1] text-white max-w-3xl">
-              {t("Armada Siap Jalan,", "Fleet Ready to Roll,")} <span className="text-brand-500">{t("Layanan Tanpa Batas", "Service Without Limits")}</span>
-            </h1>
-          </Reveal>
-        </div>
-      </section>
+      <PageHero
+        label={t("Armada & Layanan", "Fleet & Services")}
+        title={<>{t("Armada Siap Jalan,", "Fleet Ready to Roll,")} <span className="text-brand-500">{t("Layanan Tanpa Batas", "Service Without Limits")}</span></>}
+        image="/images/page-layanan.webp"
+        testid="hero-layanan"
+      />
 
       <Marquee />
 

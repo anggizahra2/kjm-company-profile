@@ -10,3 +10,4 @@ __pycache__/
 memory/
 auth_testing.md
 design_guidelines.json
+.emergent/

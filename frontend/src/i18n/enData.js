@@ -90,6 +90,7 @@ export const ARMADA = [
   {
     id: "pickup",
     nama: "Enclosed Pickup",
+    foto: "/images/armada-pickup.webp",
     jumlah: "2 Units",
     kapasitas: "± 1 Ton",
     cocok: "Packaged B3 waste: used batteries, used rags, infectious clinical waste, expired pharmaceuticals",
@@ -98,6 +99,7 @@ export const ARMADA = [
   {
     id: "truk-box",
     nama: "Enclosed Box Truck",
+    foto: "/images/armada-truk-box.webp",
     jumlah: "2 Units",
     kapasitas: "± 5 Tons",
     cocok: "Drummed used oil/solvent, contaminated packaging, and high-volume packaged solid waste",
@@ -106,6 +108,7 @@ export const ARMADA = [
   {
     id: "tangki",
     nama: "Tanker Truck",
+    foto: "/images/armada-tangki.webp",
     jumlah: "2 Units",
     kapasitas: "± 5,000 Liters",
     cocok: "Liquid B3 waste: used lubricating oil (hydraulic, engine, gear), oil treatment sludge",
@@ -114,6 +117,7 @@ export const ARMADA = [
   {
     id: "bak-terbuka",
     nama: "Open-Bed Truck",
+    foto: "/images/armada-bak-terbuka.webp",
     jumlah: "1 Unit",
     kapasitas: "± 5 Tons",
     cocok: "Bulk solid waste: bottom ash, fly ash, sludge, and palletized materials",
@@ -122,6 +126,7 @@ export const ARMADA = [
   {
     id: "forklift",
     nama: "TPS Forklift",
+    foto: "/images/armada-forklift.webp",
     jumlah: "1 Unit",
     kapasitas: "± 3 Tons",
     cocok: "Handling and stacking of B3 waste drums and packaging within the KJM storage facility",

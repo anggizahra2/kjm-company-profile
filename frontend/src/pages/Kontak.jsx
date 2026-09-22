@@ -3,6 +3,7 @@ import { MapPin, Phone, Mail, Clock, MessageCircle, Send, ArrowUpRight } from "l
 import { toast } from "sonner";
 import { SEO } from "@/components/SEO";
 import { Reveal, SectionLabel } from "@/components/Reveal";
+import { PageHero } from "@/components/PageHero";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -45,16 +46,12 @@ export default function Kontak() {
         path="/kontak"
       />
 
-      <section className="bg-brand-950 grain-overlay relative py-20 lg:py-28">
-        <div className="max-w-7xl mx-auto px-5 lg:px-8">
-          <Reveal>
-            <SectionLabel>{t("Hubungi Kami", "Contact Us")}</SectionLabel>
-            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1] text-white max-w-3xl">
-              {t("Mari Bicara Tentang", "Let's Talk About")} <span className="text-brand-500">{t("Limbah B3 Anda", "Your B3 Waste")}</span>
-            </h1>
-          </Reveal>
-        </div>
-      </section>
+      <PageHero
+        label={t("Hubungi Kami", "Contact Us")}
+        title={<>{t("Mari Bicara Tentang", "Let's Talk About")} <span className="text-brand-500">{t("Limbah B3 Anda", "Your B3 Waste")}</span></>}
+        image="/images/page-legalitas.webp"
+        testid="hero-kontak"
+      />
 
       <section className="py-20 lg:py-24">
         <div className="max-w-7xl mx-auto px-5 lg:px-8 grid lg:grid-cols-5 gap-12">
@@ -144,7 +141,7 @@ export default function Kontak() {
           </Reveal>
           <div className="grid lg:grid-cols-2 gap-6">
             {[
-              { nama: "Office", alamat: COMPANY.address, share: "https://maps.app.goo.gl/qpg2hCdtpVSw4g2e6", q: "Jl. Perumnas RT. 02 No. 56, Kampung Empat, Tarakan, Kalimantan Utara", testid: "map-office" },
+              { nama: "Office", alamat: COMPANY.address, share: "https://maps.app.goo.gl/qpg2hCdtpVSw4g2e6", q: "Jl. Rambutan No. 56, Kampung Empat, Tarakan Timur, Tarakan, Kalimantan Utara", testid: "map-office" },
               { nama: "Warehouse & TPS", alamat: COMPANY.warehouse, share: "https://maps.app.goo.gl/tjZ6kGbjsXjV3meY9", q: "Jl. Amal Baru RT. 05, Pantai Amal, Tarakan, Kalimantan Utara", testid: "map-warehouse" },
             ].map((loc) => (
               <Reveal key={loc.testid}>

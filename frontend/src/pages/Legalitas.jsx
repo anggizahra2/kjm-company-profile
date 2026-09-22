@@ -1,6 +1,7 @@
 import { FileBadge, ShieldCheck, MessageCircle } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { Reveal, SectionLabel } from "@/components/Reveal";
+import { PageHero } from "@/components/PageHero";
 import { useLang } from "@/context/LanguageContext";
 
 export default function Legalitas() {
@@ -28,22 +29,16 @@ export default function Legalitas() {
         path="/legalitas"
       />
 
-      <section className="bg-brand-950 grain-overlay relative py-20 lg:py-28">
-        <div className="max-w-7xl mx-auto px-5 lg:px-8">
-          <Reveal>
-            <SectionLabel>{t("Legalitas", "Legality")}</SectionLabel>
-            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1] text-white max-w-3xl">
-              {t("Berizin Lengkap.", "Fully Licensed.")} <span className="text-brand-500">{t("Transparan.", "Transparent.")}</span>
-            </h1>
-            <p className="mt-6 text-base lg:text-lg text-brand-100/70 max-w-2xl leading-relaxed">
-              {t(
-                "Seluruh aktivitas pengangkutan dan pengelolaan limbah B3 kami didukung perizinan resmi yang dapat Anda verifikasi. Salinan dokumen tersedia atas permintaan melalui proses NDA.",
-                "All of our B3 waste transport and management activities are backed by official permits that you can verify. Certified document copies are available on request through an NDA process."
-              )}
-            </p>
-          </Reveal>
-        </div>
-      </section>
+      <PageHero
+        label={t("Legalitas", "Legality")}
+        title={<>{t("Berizin Lengkap.", "Fully Licensed.")} <span className="text-brand-500">{t("Transparan.", "Transparent.")}</span></>}
+        description={t(
+          "Seluruh aktivitas pengangkutan dan pengelolaan limbah B3 kami didukung perizinan resmi yang dapat Anda verifikasi. Salinan dokumen tersedia atas permintaan melalui proses NDA.",
+          "All of our B3 waste transport and management activities are backed by official permits that you can verify. Certified document copies are available on request through an NDA process."
+        )}
+        image="/images/page-legalitas.webp"
+        testid="hero-legalitas"
+      />
 
       <section className="py-24 lg:py-28">
         <div className="max-w-7xl mx-auto px-5 lg:px-8">

@@ -62,11 +62,14 @@ export const ArmadaTabs = () => {
           </div>
           <div className="relative">
             <div className="absolute -inset-4 bg-brand-100 rounded-[2rem] -rotate-2" />
-            <div className="relative bg-brand-950 rounded-[1.5rem] p-8 grain-overlay overflow-hidden min-h-[280px] flex flex-col justify-end">
-              <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-brand-500 mb-2">{t("Spesifikasi Armada", "Fleet Specification")}</p>
-              <p className="font-display text-4xl lg:text-5xl font-extrabold text-white leading-none">{current.jumlah}</p>
-              <p className="font-display text-xl font-bold text-brand-500 mt-1">{current.nama}</p>
-              <p className="text-sm text-brand-100/60 mt-3">{t("Siap melayani penjemputan terjadwal maupun on-call di seluruh wilayah layanan.", "Ready for scheduled pickups and on-call service across our entire coverage area.")}</p>
+            <div className="relative rounded-[1.5rem] overflow-hidden shadow-xl bg-brand-950" data-testid="armada-photo">
+              <img src={current.foto} alt={current.nama} loading="lazy" className="w-full h-auto block" />
+              <div className="absolute inset-0 bg-gradient-to-t from-brand-950/90 via-brand-950/10 to-transparent" />
+              <div className="absolute bottom-0 left-0 p-6">
+                <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-brand-500 mb-1">{t("Spesifikasi Armada", "Fleet Specification")}</p>
+                <p className="font-display text-3xl lg:text-4xl font-extrabold text-white leading-none">{current.jumlah}</p>
+                <p className="font-display text-lg font-bold text-brand-500 mt-1">{current.nama}</p>
+              </div>
             </div>
           </div>
         </motion.div>

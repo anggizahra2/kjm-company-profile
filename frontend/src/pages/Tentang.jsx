@@ -1,6 +1,7 @@
 import { Target, Compass, HeartHandshake } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { Reveal, SectionLabel } from "@/components/Reveal";
+import { PageHero } from "@/components/PageHero";
 import { useLang } from "@/context/LanguageContext";
 
 export default function Tentang() {
@@ -18,16 +19,12 @@ export default function Tentang() {
         path="/tentang-kami"
       />
 
-      <section className="bg-brand-950 grain-overlay relative py-20 lg:py-28">
-        <div className="max-w-7xl mx-auto px-5 lg:px-8">
-          <Reveal>
-            <SectionLabel>{t("Tentang Kami", "About Us")}</SectionLabel>
-            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1] text-white max-w-3xl">
-              {t("Mengenal", "Get to Know")} <span className="text-brand-500">{COMPANY.shortName}</span> {t("Lebih Dekat", "Better")}
-            </h1>
-          </Reveal>
-        </div>
-      </section>
+      <PageHero
+        label={t("Tentang Kami", "About Us")}
+        title={<>{t("Mengenal", "Get to Know")} <span className="text-brand-500">{COMPANY.shortName}</span> {t("Lebih Dekat", "Better")}</>}
+        image="/images/page-tentang.webp"
+        testid="hero-tentang"
+      />
 
       {/* PROFIL */}
       <section id="profil" className="py-24 lg:py-28 scroll-mt-24" data-testid="profil-section">

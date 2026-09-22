@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Search } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { Reveal, SectionLabel } from "@/components/Reveal";
+import { PageHero } from "@/components/PageHero";
 import { api, imgUrl } from "@/lib/api";
 import { useLang } from "@/context/LanguageContext";
 
@@ -46,16 +47,12 @@ export default function Berita() {
         path="/berita"
       />
 
-      <section className="bg-brand-950 grain-overlay relative py-20 lg:py-28">
-        <div className="max-w-7xl mx-auto px-5 lg:px-8">
-          <Reveal>
-            <SectionLabel>{t("Berita", "News")}</SectionLabel>
-            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1] text-white max-w-3xl">
-              {t("Kabar & Kegiatan", "Latest News &")} <span className="text-brand-500">{t("Terbaru", "Activities")}</span>
-            </h1>
-          </Reveal>
-        </div>
-      </section>
+      <PageHero
+        label={t("Berita", "News")}
+        title={<>{t("Kabar & Kegiatan", "Latest News &")} <span className="text-brand-500">{t("Terbaru", "Activities")}</span></>}
+        image="/images/page-berita.webp"
+        testid="hero-berita"
+      />
 
       <section className="py-20 lg:py-24">
         <div className="max-w-7xl mx-auto px-5 lg:px-8">

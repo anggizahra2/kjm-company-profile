@@ -113,10 +113,12 @@ export default function En() {
           </Reveal>
           <Reveal delay={0.15}>
             <div className="mt-16 grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/10 rounded-2xl overflow-hidden">
-              {STATS.map((s) => (
+              {STATS.map((s, i) => (
                 <div key={s.label} className="bg-brand-950/80 backdrop-blur px-6 py-5">
                   <p className="font-display text-3xl font-extrabold text-brand-500">{s.value}</p>
-                  <p className="text-xs text-brand-100/60 mt-1 uppercase tracking-wider font-mono">{s.label}</p>
+                  <p className="text-xs text-brand-100/60 mt-1 uppercase tracking-wider font-mono">
+                    {["Years of Experience", "Industrial Clients", "Tons Transported / Year", "BUMIDA Insured"][i]}
+                  </p>
                 </div>
               ))}
             </div>

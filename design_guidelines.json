@@ -1,0 +1,111 @@
+{
+  "project_info": {
+    "company_name": "PT Nusa Enviro Lestari",
+    "industry": "Pengelola & Pengangkut Limbah B3 (Hazardous Waste Management & Logistics)",
+    "app_type": "Hybrid Marketing Web App + Admin CMS",
+    "language": "Bahasa Indonesia",
+    "tagline": "Pelopor Pengelolaan Limbah B3 Terpadu, Berizin & Berkelanjutan di Indonesia"
+  },
+  "design_archetype": {
+    "name": "Organic & Tech Teal (Awwwards SOTD Cleantech)",
+    "vibe": "Lingkungan Banget, Bersih, Modern Casual & High-Precision Engineering",
+    "theme_mode": "Dual theme support (Default Light Clean Eco with Dark Slate High-Contrast accents & Admin Dark Mode)"
+  },
+  "typography": {
+    "fonts": {
+      "display_heading": "Cabinet Grotesk / Plus Jakarta Sans (Weight 700/800)",
+      "body_text": "Plus Jakarta Sans / DM Sans (Weight 400/500)",
+      "accent_mono": "JetBrains Mono / Space Mono (for manifest numbers, permits, GPS codes, dates)"
+    },
+    "scale": {
+      "hero_h1": "text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1]",
+      "section_h2": "text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-emerald-950 dark:text-emerald-50",
+      "subsection_h3": "text-xl sm:text-2xl font-semibold tracking-tight",
+      "card_h4": "text-lg sm:text-xl font-semibold",
+      "body": "text-base leading-relaxed text-slate-700 dark:text-slate-300",
+      "small_label": "text-xs font-mono uppercase tracking-[0.2em] text-teal-700 dark:text-teal-400 font-medium"
+    }
+  },
+  "colors": {
+    "palette": {
+      "primary_teal": "#0D3B3E",
+      "bio_teal": "#00A884",
+      "mint_glow": "#10B981",
+      "mint_light": "#E8F5F1",
+      "surface_slate": "#F4F7F6",
+      "deep_obsidian": "#081C1D",
+      "hazard_warning": "#F59E0B",
+      "safe_green": "#059669",
+      "text_main": "#0F172A",
+      "text_muted": "#475569"
+    },
+    "gradients": {
+      "hero_overlay": "linear-gradient(135deg, rgba(13,59,62,0.92) 0%, rgba(8,28,29,0.85) 100%)",
+      "glow_border": "linear-gradient(90deg, #00A884, #10B981, #0D3B3E)"
+    }
+  },
+  "layout_and_navigation": {
+    "header": {
+      "style": "Glassmorphism sticky header (backdrop-blur-xl bg-white/80 dark:bg-slate-900/80 border-b border-teal-100/50 z-50)",
+      "menu_items": [
+        { "label": "Beranda", "href": "/" },
+        { 
+          "label": "Tentang Kami", 
+          "href": "/tentang-kami",
+          "dropdown": ["Profil Perusahaan", "Visi & Misi", "Nilai Perusahaan"]
+        },
+        { "label": "Legalitas", "href": "/legalitas" },
+        { 
+          "label": "Armada & Layanan", 
+          "href": "/layanan",
+          "dropdown": ["Armada Transportasi", "Wilayah Layanan", "Pengangkutan Limbah B3", "Pengelolaan Limbah B3"]
+        },
+        { "label": "Galeri", "href": "/galeri" },
+        { "label": "Berita", "href": "/berita" }
+      ],
+      "actions": [
+        { "label": "Lacak Manifest B3", "style": "outline-teal" },
+        { "label": "Hubungi Kami", "style": "primary-emerald-cta" }
+      ]
+    },
+    "page_structure": {
+      "hero_section": "Kinetic Hero with masked line-by-line headline reveal, status badges, real background imagery, and impact stats grid",
+      "editorial_marquee": "Slow drifting ticker ribbon showcasing KLHK Permits, ISO 14001, Festronik Integrated, 100% Zero-Leak Guarantee",
+      "manifesto_chapters": "Numbered 01-03 chapters for Visi, Misi, and Nilai Perusahaan with side-by-side interactive toggle",
+      "armada_layanan_section": "Interactive tabs comparing Fleet Types (Wingbox, Tanker, Dump Truck, ISO Tank) and B3 Waste Categories",
+      "legalitas_grid": "Official permits card grid with searchable document codes, issuing body (KLHK/Kemenhub), and download request CTA",
+      "coverage_map": "Interactive Indonesia coverage map highlight (Jawa, Sumatra, Kalimantan, Sulawesi) with operational hubs",
+      "gallery_grid": "Filterable gallery (Fasilitas, Fleet, Operations, CSR & Safety)",
+      "news_section": "Editorial news grid with search, categories, and detail modal/page",
+      "whatsapp_floating": "Floating bottom-right green pulse button with instant pre-filled chat message",
+      "footer": "Multi-column layout with HQ address in Cikarang Industrial Area, KLHK License info, direct contacts, socials, and quick inquiry form"
+    }
+  },
+  "key_features_and_components": {
+    "kinetic_hero_reveal": "Framer Motion staggered text mask revealing line by line with spring animation on load",
+    "manifest_tracker_widget": "Interactive widget where client can enter Festronik B3 Manifest Code to check real-time disposal status",
+    "admin_dashboard": {
+      "route": "/admin",
+      "features": ["Login modal/page", "Berita/Article CMS (CRUD)", "Galeri Photo Uploader (CRUD)", "Festronik Tracking Monitor preview"]
+    }
+  },
+  "media": {
+    "image_urls": {
+      "hero_fleet": "https://images.unsplash.com/photo-1700891271072-03bef644f435?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTJ8MHwxfHNlYXJjaHwyfHxoYXphcmRvdXMlMjB3YXN0ZSUyMHRyYW5zcG9ydCUyMHRydWNrJTIwY2xlYW4lMjB0ZWNobm9sb2d5JTIwZmFjaWxpdHklMjBncmVlbiUyMGVuZXJneSUyMGVudmlyb25tZW50fGVufDB8fHx8MTc4OTExNDk4OXww&ixlib=rb-4.1.0&q=85",
+      "facility_warehouse": "https://images.unsplash.com/photo-1717667745830-de42bb75a4fa?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTJ8MHwxfHNlYXJjaHwzfHxoYXphcmRvdXMlMjB3YXN0ZSUyMHRyYW5zcG9ydCUyMHRydWNrJTIwY2xlYW4lMjB0ZWNobm9sb2d5JTIwZmFjaWxpdHklMjBncmVlbiUyMGVuZXJneSUyMGVudmlyb25tZW50fGVufDB8fHx8MTc4OTExNDk4OXww&ixlib=rb-4.1.0&q=85",
+      "green_transport": "https://images.unsplash.com/photo-1660574554228-4cb61ed52309?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTJ8MHwxfHNlYXJjaHwxfHxoYXphcmRvdXMlMjB3YXN0ZSUyMHRyYW5zcG9ydCUyMHRydWNrJTIwY2xlYW4lMjB0ZWNobm9sb2d5JTIwZmFjaWxpdHklMjBncmVlbiUyMGVuZXJneSUyMGVudmlyb25tZW50fGVufDB8fHx8MTc4OTExNDk4OXww&ixlib=rb-4.1.0&q=85",
+      "hazard_tanker": "https://images.unsplash.com/photo-1549909226-2f7fcd960d6e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTJ8MHwxfHNlYXJjaHw0fHxoYXphcmRvdXMlMjB3YXN0ZSUyMHRyYW5zcG9ydCUyMHRydWNrJTIwY2xlYW4lMjB0ZWNobm9sb2d5JTIwZmFjaWxpdHklMjBncmVlbiUyMGVuZXJneSUyMGVudmlyb25tZW50fGVufDB8fHx8MTc4OTExNDk4OXww&ixlib=rb-4.1.0&q=85",
+      "lab_testing": "https://images.unsplash.com/photo-1781330201986-005653f25a3f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2ODh8MHwxfHNlYXJjaHwzfHxtb2Rlcm4lMjBlbnZpcm9ubWVudGFsJTIwZW5naW5lZXIlMjBsYWJvcmF0b3J5JTIwaGF6YXJkb3VzJTIwd2FzdGUlMjByZWN5Y2xpbmclMjBwbGFudHxlbnwwfHx8fDE3ODkxMTQ5OTd8MA&ixlib=rb-4.1.0&q=85",
+      "recycling_plant": "https://images.unsplash.com/photo-1763315156830-07870b159121?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2ODh8MHwxfHNlYXJjaHwyfHxtb2Rlcm4lMjBlbnZpcm9ubWVudGFsJTIwZW5naW5lZXIlMjBsYWJvcmF0b3J5JTIwaGF6YXJkb3VzJTIwd2FzdGUlMjByZWN5Y2xpbmclMjBwbGFudHxlbnwwfHx8fDE3ODkxMTQ5OTd8MA&ixlib=rb-4.1.0&q=85",
+      "storage_facility": "https://images.unsplash.com/photo-1654703681116-3988648da2b6?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2ODh8MHwxfHNlYXJjaHw0fHxtb2Rlcm4lMjBlbnZpcm9ubWVudGFsJTIwZW5naW5lZXIlMjBsYWJvcmF0b3J5JTIwaGF6YXJkb3VzJTIwd2FzdGUlMjByZWN5Y2xpbmclMjBwbGFudHxlbnwwfHx8fDE3ODkxMTQ5OTd8MA&ixlib=rb-4.1.0&q=85"
+    }
+  },
+  "instructions_to_main_agent": [
+    "Ensure all interactive components (buttons, links, inputs, filters, tabs, menu items, modals) contain explicit data-testid attributes.",
+    "Do NOT center-align main paragraph content or body blocks. Use left-aligned editorial layout with generous padding.",
+    "Use Lenis smooth scrolling and Framer Motion for scroll triggers.",
+    "Support full SEO meta tags (title, meta description, keywords, Open Graph, JSON-LD structured data for Company/Organization) in index.html and React Helmet / Page SEO wrapper.",
+    "Ensure seamless Bahasa Indonesia terminology (e.g., SIMPEL KLHK, Festronik, Limbah B3, Karakteristik Limbah, Manifest, Transporter Berizin).",
+    "Keep floating WhatsApp CTA accessible on all client pages with custom pre-filled inquiry text."
+  ]
+}

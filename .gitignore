@@ -1,0 +1,12 @@
+node_modules/
+build/
+dist/
+__pycache__/
+*.pyc
+.env
+!.env.example
+.DS_Store
+*.log
+memory/
+auth_testing.md
+design_guidelines.json

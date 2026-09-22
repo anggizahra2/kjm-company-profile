@@ -21,6 +21,11 @@
 - Integrasi: Emergent managed Resend (form kontak → email), Emergent object storage (upload foto admin)
 - SEO: meta lengkap + OG/Twitter + JSON-LD Organization & WebSite, robots.txt, sitemap dinamis `/api/sitemap.xml` (termasuk slug berita)
 
+## Selesai (22 September 2026, sesi 3)
+- Deskripsi armada: plat nomor dihapus, diganti kalimat selling-point
+- Halaman English /en: profil lengkap (about, visi-misi, layanan, armada tanpa plat, coverage, compliance, mitra, kontak + link maps), tombol EN di header desktop+mobile, hreflang id/en
+- Git history dirapikan jadi 1 commit bersih atas nama anggizahra2 (riwayat lama berisi password dibuang), lalu push ke https://github.com/anggizahra2/kjm-company-profile (branch main) via PAT user; token tidak disimpan di git config
+
 ## Selesai (22 September 2026, sesi 2) — Masukan user
 - Hero beranda diganti foto armada asli KJM (truk box hitam-kuning, /images/hero-armada.webp 152KB)
 - Halaman Kontak: embed Google Maps office Perumnas & warehouse Amal Baru + tombol buka di Maps (link share asli)

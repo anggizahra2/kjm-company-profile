@@ -1,7 +1,8 @@
-import { MARQUEE_ITEMS } from "@/data/company";
+import { useLang } from "@/context/LanguageContext";
 
 export const Marquee = () => {
-  const items = [...MARQUEE_ITEMS, ...MARQUEE_ITEMS];
+  const { data } = useLang();
+  const items = [...data.MARQUEE_ITEMS, ...data.MARQUEE_ITEMS];
   return (
     <div className="bg-brand-950 py-4 overflow-hidden border-y border-brand-900" data-testid="editorial-marquee">
       <div className="flex w-max animate-marquee gap-0">

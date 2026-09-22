@@ -5,6 +5,7 @@ import { HelmetProvider } from "react-helmet-async";
 import Lenis from "lenis";
 import { Toaster } from "sonner";
 import { AuthProvider } from "@/context/AuthContext";
+import { LanguageProvider } from "@/context/LanguageContext";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
@@ -16,7 +17,6 @@ import Galeri from "@/pages/Galeri";
 import Berita from "@/pages/Berita";
 import BeritaDetail from "@/pages/BeritaDetail";
 import Kontak from "@/pages/Kontak";
-import En from "@/pages/En";
 import AdminLogin from "@/pages/admin/Login";
 import AdminDashboard from "@/pages/admin/Dashboard";
 
@@ -64,25 +64,26 @@ function App() {
   return (
     <div className="App">
       <HelmetProvider>
-        <AuthProvider>
-          <BrowserRouter>
-            <ScrollManager />
-            <Toaster position="top-center" richColors />
-            <Routes>
-              <Route path="/" element={<PublicLayout><Home /></PublicLayout>} />
-              <Route path="/tentang-kami" element={<PublicLayout><Tentang /></PublicLayout>} />
-              <Route path="/legalitas" element={<PublicLayout><Legalitas /></PublicLayout>} />
-              <Route path="/layanan" element={<PublicLayout><Layanan /></PublicLayout>} />
-              <Route path="/galeri" element={<PublicLayout><Galeri /></PublicLayout>} />
-              <Route path="/berita" element={<PublicLayout><Berita /></PublicLayout>} />
-              <Route path="/berita/:slug" element={<PublicLayout><BeritaDetail /></PublicLayout>} />
-              <Route path="/kontak" element={<PublicLayout><Kontak /></PublicLayout>} />
-              <Route path="/en" element={<PublicLayout><En /></PublicLayout>} />
-              <Route path="/admin/login" element={<AdminLogin />} />
-              <Route path="/admin" element={<AdminDashboard />} />
-            </Routes>
-          </BrowserRouter>
-        </AuthProvider>
+        <LanguageProvider>
+          <AuthProvider>
+            <BrowserRouter>
+              <ScrollManager />
+              <Toaster position="top-center" richColors />
+              <Routes>
+                <Route path="/" element={<PublicLayout><Home /></PublicLayout>} />
+                <Route path="/tentang-kami" element={<PublicLayout><Tentang /></PublicLayout>} />
+                <Route path="/legalitas" element={<PublicLayout><Legalitas /></PublicLayout>} />
+                <Route path="/layanan" element={<PublicLayout><Layanan /></PublicLayout>} />
+                <Route path="/galeri" element={<PublicLayout><Galeri /></PublicLayout>} />
+                <Route path="/berita" element={<PublicLayout><Berita /></PublicLayout>} />
+                <Route path="/berita/:slug" element={<PublicLayout><BeritaDetail /></PublicLayout>} />
+                <Route path="/kontak" element={<PublicLayout><Kontak /></PublicLayout>} />
+                <Route path="/admin/login" element={<AdminLogin />} />
+                <Route path="/admin" element={<AdminDashboard />} />
+              </Routes>
+            </BrowserRouter>
+          </AuthProvider>
+        </LanguageProvider>
       </HelmetProvider>
     </div>
   );

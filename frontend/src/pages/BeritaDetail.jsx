@@ -4,8 +4,10 @@ import { ArrowLeft } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { Reveal } from "@/components/Reveal";
 import { api, imgUrl } from "@/lib/api";
+import { useLang } from "@/context/LanguageContext";
 
 export default function BeritaDetail() {
+  const { lang, t } = useLang();
   const { slug } = useParams();
   const [item, setItem] = useState(null);
   const [notFound, setNotFound] = useState(false);
@@ -20,16 +22,16 @@ export default function BeritaDetail() {
   if (notFound) {
     return (
       <div className="py-32 text-center" data-testid="news-notfound">
-        <h1 className="font-display text-2xl font-bold text-brand-950">Berita tidak ditemukan</h1>
+        <h1 className="font-display text-2xl font-bold text-brand-950">{t("Berita tidak ditemukan", "Article not found")}</h1>
         <Link to="/berita" className="mt-4 inline-block text-brand-600 text-sm font-semibold" data-testid="news-back-link">
-          ← Kembali ke Berita
+          {t("← Kembali ke Berita", "← Back to News")}
         </Link>
       </div>
     );
   }
 
   if (!item) {
-    return <div className="py-32 text-center text-sm text-slate-500" data-testid="news-detail-loading">Memuat berita…</div>;
+    return <div className="py-32 text-center text-sm text-slate-500" data-testid="news-detail-loading">{t("Memuat berita…", "Loading article…")}</div>;
   }
 
   return (
@@ -40,10 +42,10 @@ export default function BeritaDetail() {
         <div className="max-w-3xl mx-auto px-5 lg:px-8">
           <Reveal>
             <Link to="/berita" className="inline-flex items-center gap-2 text-brand-600 text-sm font-semibold mb-8 group" data-testid="news-detail-back">
-              <ArrowLeft className="w-4 h-4 transition-transform duration-300 group-hover:-translate-x-1" /> Semua Berita
+              <ArrowLeft className="w-4 h-4 transition-transform duration-300 group-hover:-translate-x-1" /> {t("Semua Berita", "All News")}
             </Link>
             <p className="text-xs font-mono uppercase tracking-[0.2em] text-brand-600">
-              {item.category} — {new Date(item.created_at).toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" })}
+              {item.category} — {new Date(item.created_at).toLocaleDateString(lang === "en" ? "en-US" : "id-ID", { day: "numeric", month: "long", year: "numeric" })}
             </p>
             <h1 className="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.15] text-brand-950" data-testid="news-detail-title">
               {item.title}

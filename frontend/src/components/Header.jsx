@@ -1,45 +1,66 @@
 import { useState } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Leaf, ChevronDown, Menu, X, Phone } from "lucide-react";
-import { COMPANY } from "@/data/company";
-
-const NAV = [
-  { label: "Beranda", to: "/", id: "nav-beranda" },
-  {
-    label: "Tentang Kami",
-    to: "/tentang-kami",
-    id: "nav-tentang",
-    children: [
-      { label: "Profil Perusahaan", to: "/tentang-kami#profil", id: "nav-tentang-profil" },
-      { label: "Visi & Misi", to: "/tentang-kami#visi-misi", id: "nav-tentang-visi" },
-      { label: "Nilai Perusahaan", to: "/tentang-kami#nilai", id: "nav-tentang-nilai" },
-    ],
-  },
-  { label: "Legalitas", to: "/legalitas", id: "nav-legalitas" },
-  {
-    label: "Armada & Layanan",
-    to: "/layanan",
-    id: "nav-layanan",
-    children: [
-      { label: "Armada", to: "/layanan#armada", id: "nav-layanan-armada" },
-      { label: "Wilayah Layanan", to: "/layanan#wilayah", id: "nav-layanan-wilayah" },
-      { label: "Pengangkutan Limbah B3", to: "/layanan#pengangkutan", id: "nav-layanan-pengangkutan" },
-      { label: "Pengelolaan Limbah B3", to: "/layanan#pengelolaan", id: "nav-layanan-pengelolaan" },
-    ],
-  },
-  { label: "Galeri", to: "/galeri", id: "nav-galeri" },
-  { label: "Berita", to: "/berita", id: "nav-berita" },
-];
+import { ChevronDown, Menu, X, Phone } from "lucide-react";
+import { useLang } from "@/context/LanguageContext";
 
 const navLinkClass = ({ isActive }) =>
   `text-sm font-medium transition-colors duration-300 ${
     isActive ? "text-brand-600" : "text-brand-950/70 hover:text-brand-600"
   }`;
 
+const LangToggle = ({ testid }) => {
+  const { lang, setLang } = useLang();
+  return (
+    <div className="flex items-center border border-brand-100 rounded-full p-0.5" data-testid={testid}>
+      {["id", "en"].map((l) => (
+        <button
+          key={l}
+          onClick={() => setLang(l)}
+          data-testid={`${testid}-${l}`}
+          className={`text-xs font-mono font-semibold tracking-wider px-3 py-1.5 rounded-full transition-colors duration-300 ${
+            lang === l ? "bg-brand-900 text-white" : "text-brand-950/50 hover:text-brand-600"
+          }`}
+        >
+          {l.toUpperCase()}
+        </button>
+      ))}
+    </div>
+  );
+};
+
 export const Header = () => {
   const [open, setOpen] = useState(false);
-  const location = useLocation();
+  const { t, data } = useLang();
+  const { COMPANY } = data;
+
+  const NAV = [
+    { label: t("Beranda", "Home"), to: "/", id: "nav-beranda" },
+    {
+      label: t("Tentang Kami", "About Us"),
+      to: "/tentang-kami",
+      id: "nav-tentang",
+      children: [
+        { label: t("Profil Perusahaan", "Company Profile"), to: "/tentang-kami#profil", id: "nav-tentang-profil" },
+        { label: t("Visi & Misi", "Vision & Mission"), to: "/tentang-kami#visi-misi", id: "nav-tentang-visi" },
+        { label: t("Nilai Perusahaan", "Company Values"), to: "/tentang-kami#nilai", id: "nav-tentang-nilai" },
+      ],
+    },
+    { label: t("Legalitas", "Legality"), to: "/legalitas", id: "nav-legalitas" },
+    {
+      label: t("Armada & Layanan", "Fleet & Services"),
+      to: "/layanan",
+      id: "nav-layanan",
+      children: [
+        { label: t("Armada", "Fleet"), to: "/layanan#armada", id: "nav-layanan-armada" },
+        { label: t("Wilayah Layanan", "Coverage Area"), to: "/layanan#wilayah", id: "nav-layanan-wilayah" },
+        { label: t("Pengangkutan Limbah B3", "B3 Waste Transport"), to: "/layanan#pengangkutan", id: "nav-layanan-pengangkutan" },
+        { label: t("Pengelolaan Limbah B3", "B3 Waste Management"), to: "/layanan#pengelolaan", id: "nav-layanan-pengelolaan" },
+      ],
+    },
+    { label: t("Galeri", "Gallery"), to: "/galeri", id: "nav-galeri" },
+    { label: t("Berita", "News"), to: "/berita", id: "nav-berita" },
+  ];
 
   return (
     <header
@@ -53,7 +74,7 @@ export const Header = () => {
             <span className="leading-tight">
               <span className="block font-display font-bold text-brand-950 text-base">{COMPANY.name}</span>
               <span className="block text-[10px] font-mono uppercase tracking-[0.18em] text-brand-600">
-                Pengelolaan Limbah B3
+                {t("Pengelolaan Limbah B3", "B3 Waste Management")}
               </span>
             </span>
           </Link>
@@ -92,20 +113,14 @@ export const Header = () => {
           </nav>
 
           <div className="hidden lg:flex items-center gap-4">
-            <Link
-              to="/en"
-              data-testid="nav-en"
-              className="text-xs font-mono font-semibold tracking-wider text-brand-950/60 hover:text-brand-600 border border-brand-100 hover:border-brand-600 rounded-full px-3 py-1.5 transition-colors duration-300"
-            >
-              EN
-            </Link>
+            <LangToggle testid="lang-toggle" />
             <Link
               to="/kontak"
               data-testid="header-contact-cta"
               className="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-900 text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-colors duration-300"
             >
               <Phone className="w-4 h-4" />
-              Hubungi Kami
+              {t("Hubungi Kami", "Contact Us")}
             </Link>
           </div>
 
@@ -113,7 +128,7 @@ export const Header = () => {
             className="lg:hidden text-brand-950 p-2"
             onClick={() => setOpen(!open)}
             data-testid="mobile-menu-toggle"
-            aria-label="Buka menu"
+            aria-label={t("Buka menu", "Open menu")}
           >
             {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -158,14 +173,9 @@ export const Header = () => {
                   )}
                 </div>
               ))}
-              <Link
-                to="/en"
-                onClick={() => setOpen(false)}
-                data-testid="mobile-nav-en"
-                className="block py-2.5 text-sm font-mono font-semibold tracking-wider text-brand-600"
-              >
-                EN — English Version
-              </Link>
+              <div className="py-2">
+                <LangToggle testid="mobile-lang-toggle" />
+              </div>
               <Link
                 to="/kontak"
                 onClick={() => setOpen(false)}
@@ -173,7 +183,7 @@ export const Header = () => {
                 className="mt-2 flex items-center justify-center gap-2 bg-brand-600 text-white text-sm font-semibold px-5 py-3 rounded-full"
               >
                 <Phone className="w-4 h-4" />
-                Hubungi Kami
+                {t("Hubungi Kami", "Contact Us")}
               </Link>
             </div>
           </motion.nav>

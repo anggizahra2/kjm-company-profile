@@ -3,23 +3,29 @@ import { SEO } from "@/components/SEO";
 import { Reveal, SectionLabel } from "@/components/Reveal";
 import { Marquee } from "@/components/Marquee";
 import { ArmadaTabs } from "@/components/ArmadaTabs";
-import { WILAYAH, JENIS_LIMBAH, ALUR_PENGANGKUTAN, PENGELOLAAN, HERO_IMAGES } from "@/data/company";
+import { useLang } from "@/context/LanguageContext";
 
 export default function Layanan() {
+  const { t, data } = useLang();
+  const { WILAYAH, JENIS_LIMBAH, ALUR_PENGANGKUTAN, PENGELOLAAN, HERO_IMAGES } = data;
+
   return (
     <div data-testid="layanan-page">
       <SEO
-        title="Armada & Layanan"
-        description="Armada pengangkut limbah B3 berizin Kemenhub (wingbox, tangki, arm roll, ISO tank), wilayah layanan Jawa-Sumatra-Kalimantan-Sulawesi, serta layanan pengangkutan dan pengelolaan limbah B3 terpadu."
+        title={t("Armada & Layanan", "Fleet & Services")}
+        description={t(
+          "Armada pengangkut limbah B3 berizin Kemenhub, wilayah layanan seluruh Kalimantan Utara, serta layanan pengangkutan dan pengumpulan limbah B3 terpadu.",
+          "Ministry-licensed B3 waste transport fleet, coverage across North Kalimantan, and integrated B3 waste transport and collection services."
+        )}
         path="/layanan"
       />
 
       <section className="bg-brand-950 grain-overlay relative py-20 lg:py-28">
         <div className="max-w-7xl mx-auto px-5 lg:px-8">
           <Reveal>
-            <SectionLabel>Armada & Layanan</SectionLabel>
+            <SectionLabel>{t("Armada & Layanan", "Fleet & Services")}</SectionLabel>
             <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1] text-white max-w-3xl">
-              Armada Siap Jalan, <span className="text-brand-500">Layanan Tanpa Batas</span>
+              {t("Armada Siap Jalan,", "Fleet Ready to Roll,")} <span className="text-brand-500">{t("Layanan Tanpa Batas", "Service Without Limits")}</span>
             </h1>
           </Reveal>
         </div>
@@ -32,10 +38,10 @@ export default function Layanan() {
         <div className="max-w-7xl mx-auto px-5 lg:px-8">
           <Reveal>
             <SectionLabel>
-              <span className="inline-flex items-center gap-2"><Truck className="w-4 h-4" /> Armada</span>
+              <span className="inline-flex items-center gap-2"><Truck className="w-4 h-4" /> {t("Armada", "Fleet")}</span>
             </SectionLabel>
             <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-brand-950 mb-12 max-w-2xl">
-              7 Unit Armada + 1 Forklift, Siap Setiap Hari Kerja
+              {t("7 Unit Armada + 1 Forklift, Siap Setiap Hari Kerja", "7 Fleet Units + 1 Forklift, Ready Every Working Day")}
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
@@ -49,23 +55,25 @@ export default function Layanan() {
         <div className="max-w-7xl mx-auto px-5 lg:px-8">
           <Reveal>
             <SectionLabel>
-              <span className="inline-flex items-center gap-2"><MapPin className="w-4 h-4" /> Wilayah Layanan</span>
+              <span className="inline-flex items-center gap-2"><MapPin className="w-4 h-4" /> {t("Wilayah Layanan", "Coverage Area")}</span>
             </SectionLabel>
             <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-brand-950 mb-4 max-w-2xl">
-              Melayani Seluruh Wilayah Kalimantan Utara
+              {t("Melayani Seluruh Wilayah Kalimantan Utara", "Serving All of North Kalimantan")}
             </h2>
             <p className="text-base text-slate-600 max-w-2xl mb-12 leading-relaxed">
-              Proses pengangkutan limbah B3 oleh PT Kaltara Jaya Makmur dilaksanakan di seluruh wilayah Provinsi
-              Kalimantan Utara — dari hub office & TPS kami di Kota Tarakan.
+              {t(
+                "Proses pengangkutan limbah B3 oleh PT Kaltara Jaya Makmur dilaksanakan di seluruh wilayah Provinsi Kalimantan Utara — dari hub office & TPS kami di Kota Tarakan.",
+                "B3 waste transport by PT Kaltara Jaya Makmur is carried out across the entire North Kalimantan Province — from our office & TPS hub in Tarakan City."
+              )}
             </p>
           </Reveal>
           <div className="grid sm:grid-cols-2 gap-5">
             {WILAYAH.map((w, i) => (
               <Reveal key={w.pulau} delay={i * 0.08}>
                 <div className="bg-brand-50 border border-brand-100 rounded-2xl p-8 h-full hover:border-brand-600 transition-colors duration-300" data-testid={`wilayah-card-${i}`}>
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center justify-between gap-3 mb-4">
                     <h3 className="font-display text-xl font-bold text-brand-950">{w.pulau}</h3>
-                    <span className="text-[10px] font-mono uppercase tracking-wider bg-brand-900 text-brand-500 px-3 py-1 rounded-full">{w.status}</span>
+                    <span className="text-[10px] font-mono uppercase tracking-wider bg-brand-900 text-brand-500 px-3 py-1 rounded-full shrink-0">{w.status}</span>
                   </div>
                   <p className="text-sm text-slate-600 leading-relaxed">{w.kota}</p>
                 </div>
@@ -80,14 +88,16 @@ export default function Layanan() {
         <div className="max-w-7xl mx-auto px-5 lg:px-8">
           <Reveal>
             <SectionLabel>
-              <span className="inline-flex items-center gap-2"><Truck className="w-4 h-4" /> Pengangkutan Limbah B3</span>
+              <span className="inline-flex items-center gap-2"><Truck className="w-4 h-4" /> {t("Pengangkutan Limbah B3", "B3 Waste Transport")}</span>
             </SectionLabel>
             <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white mb-4 max-w-2xl">
-              Lima Langkah, Nol Kebocoran, Seratus Persen Terdokumentasi
+              {t("Lima Langkah, Nol Kebocoran, Seratus Persen Terdokumentasi", "Five Steps, Zero Leaks, One Hundred Percent Documented")}
             </h2>
             <p className="text-base text-brand-100/70 max-w-2xl mb-14 leading-relaxed">
-              Setiap pengangkutan mengikuti prosedur baku yang diaudit — dari identifikasi karakteristik limbah
-              hingga pelaporan akhir manifest Festronik.
+              {t(
+                "Setiap pengangkutan mengikuti prosedur baku yang diaudit — dari identifikasi karakteristik limbah hingga pelaporan akhir.",
+                "Every transport follows audited standard procedures — from waste characteristic identification to final reporting."
+              )}
             </p>
           </Reveal>
           <div className="space-y-0">
@@ -103,7 +113,7 @@ export default function Layanan() {
           </div>
           <Reveal delay={0.2}>
             <div className="mt-14">
-              <h3 className="font-display text-lg font-bold text-white mb-6">Jenis Limbah B3 yang Kami Angkut</h3>
+              <h3 className="font-display text-lg font-bold text-white mb-6">{t("Jenis Limbah B3 yang Kami Angkut", "B3 Waste Categories We Handle")}</h3>
               <div className="flex flex-wrap gap-3">
                 {JENIS_LIMBAH.map((j) => (
                   <span key={j} className="inline-flex items-center gap-2 bg-white/10 border border-white/15 text-brand-100/80 text-xs font-medium px-4 py-2 rounded-full" data-testid="limbah-chip">
@@ -122,10 +132,10 @@ export default function Layanan() {
           <div>
             <Reveal>
               <SectionLabel>
-                <span className="inline-flex items-center gap-2"><Recycle className="w-4 h-4" /> Pengelolaan Limbah B3</span>
+                <span className="inline-flex items-center gap-2"><Recycle className="w-4 h-4" /> {t("Pengelolaan Limbah B3", "B3 Waste Management")}</span>
               </SectionLabel>
               <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-brand-950 mb-10">
-                Dari Penyimpanan Hingga Pengolahan Akhir
+                {t("Dari Pengumpulan Hingga Penyimpanan yang Aman", "From Collection to Safe Storage")}
               </h2>
             </Reveal>
             <div className="space-y-5">
@@ -145,7 +155,7 @@ export default function Layanan() {
               <div className="absolute -inset-4 bg-brand-100 rounded-[2rem] rotate-2" />
               <img
                 src={HERO_IMAGES.lab}
-                alt="Laboratorium uji karakteristik limbah B3"
+                alt={t("Operasional pengelolaan limbah B3", "B3 waste management operations")}
                 className="relative rounded-[1.5rem] w-full aspect-[4/5] object-cover shadow-xl"
                 loading="lazy"
               />

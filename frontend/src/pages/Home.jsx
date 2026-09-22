@@ -7,7 +7,7 @@ import { Reveal, SectionLabel } from "@/components/Reveal";
 import { Marquee } from "@/components/Marquee";
 import { ArmadaTabs } from "@/components/ArmadaTabs";
 import { api, imgUrl } from "@/lib/api";
-import { COMPANY, STATS, HERO_IMAGES, LEGALITAS_TEKNIS, MITRA } from "@/data/company";
+import { useLang } from "@/context/LanguageContext";
 
 const partnerInitials = (name) => {
   if (/^dan/i.test(name)) return "100+";
@@ -29,38 +29,9 @@ const MaskedLine = ({ children, delay = 0 }) => (
   </span>
 );
 
-const LAYANAN_CARDS = [
-  {
-    icon: Truck,
-    judul: "Pengangkutan Limbah B3",
-    deskripsi: "Armada berizin Kemenhub dengan GPS real-time dan manifest Festronik untuk setiap perjalanan.",
-    to: "/layanan#pengangkutan",
-    id: "layanan-card-pengangkutan",
-  },
-  {
-    icon: Recycle,
-    judul: "Pengelolaan Limbah B3",
-    deskripsi: "Penyimpanan, pengumpulan, pemanfaatan, hingga pengolahan akhir di fasilitas berizin KLHK.",
-    to: "/layanan#pengelolaan",
-    id: "layanan-card-pengelolaan",
-  },
-  {
-    icon: FlaskConical,
-    judul: "Uji Karakteristik Limbah",
-    deskripsi: "Identifikasi dan klasifikasi limbah B3 Anda sesuai PP 22/2021 oleh tim berpengalaman.",
-    to: "/layanan#pengelolaan",
-    id: "layanan-card-uji",
-  },
-  {
-    icon: ShieldCheck,
-    judul: "Konsultasi Kepatuhan",
-    deskripsi: "Pendampingan dokumen lingkungan, pelaporan SIMPEL, dan audit kepatuhan internal.",
-    to: "/kontak",
-    id: "layanan-card-konsultasi",
-  },
-];
-
 export default function Home() {
+  const { lang, t, data } = useLang();
+  const { COMPANY, STATS, HERO_IMAGES, LEGALITAS_TEKNIS, MITRA } = data;
   const heroRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "22%"]);
@@ -72,6 +43,39 @@ export default function Home() {
     api.get("/gallery").then(({ data }) => setGallery(data.slice(0, 6))).catch(() => {});
   }, []);
 
+  const waLink = `https://wa.me/${COMPANY.whatsapp}?text=${encodeURIComponent(COMPANY.whatsappMessage)}`;
+
+  const LAYANAN_CARDS = [
+    {
+      icon: Truck,
+      judul: t("Pengangkutan Limbah B3", "B3 Waste Transport"),
+      deskripsi: t("Armada berizin Kemenhub dengan GPS real-time dan dokumentasi lengkap untuk setiap perjalanan.", "Ministry-licensed fleet with real-time GPS and full documentation for every trip."),
+      to: "/layanan#pengangkutan",
+      id: "layanan-card-pengangkutan",
+    },
+    {
+      icon: Recycle,
+      judul: t("Pengelolaan Limbah B3", "B3 Waste Management"),
+      deskripsi: t("Pengumpulan dan penyimpanan sementara limbah B3 berizin di TPS kami di Tarakan.", "Licensed collection and temporary storage of B3 waste at our TPS facility in Tarakan."),
+      to: "/layanan#pengelolaan",
+      id: "layanan-card-pengelolaan",
+    },
+    {
+      icon: FlaskConical,
+      judul: t("Identifikasi Jenis Limbah", "Waste Identification"),
+      deskripsi: t("Identifikasi dan klasifikasi limbah B3 Anda oleh tim berpengalaman sesuai peraturan berlaku.", "Identification and classification of your B3 waste by an experienced team per regulations."),
+      to: "/layanan#pengelolaan",
+      id: "layanan-card-uji",
+    },
+    {
+      icon: ShieldCheck,
+      judul: t("Konsultasi Kepatuhan", "Compliance Consulting"),
+      deskripsi: t("Pendampingan dokumen lingkungan dan kepatuhan pelaporan limbah B3 perusahaan Anda.", "Assistance with environmental documents and B3 waste reporting compliance."),
+      to: "/kontak",
+      id: "layanan-card-konsultasi",
+    },
+  ];
+
   return (
     <div data-testid="home-page">
       <SEO path="/" />
@@ -81,7 +85,7 @@ export default function Home() {
         <motion.div className="absolute inset-0" style={{ y: bgY }}>
           <img
             src={HERO_IMAGES.main}
-            alt="Armada pengangkut limbah B3 PT Nusa Enviro Lestari"
+            alt={t("Armada pengangkut limbah B3 PT Kaltara Jaya Makmur", "PT Kaltara Jaya Makmur B3 waste transport fleet")}
             className="w-full h-[120%] object-cover opacity-40"
           />
           <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(13,59,62,0.92) 0%, rgba(8,28,29,0.85) 100%)" }} />
@@ -93,30 +97,37 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1, duration: 0.6 }}
             className="flex flex-wrap items-center gap-3 mb-8"
+            key={lang}
           >
             <span className="inline-flex items-center gap-2 bg-brand-600/20 border border-brand-500/40 text-brand-500 text-xs font-mono uppercase tracking-wider px-4 py-1.5 rounded-full" data-testid="hero-badge-izin">
-              <ShieldCheck className="w-3.5 h-3.5" /> Berizin KLHK & Kemenhub
+              <ShieldCheck className="w-3.5 h-3.5" /> {t("Berizin KLHK & Kemenhub", "Licensed by KLHK & MoT")}
             </span>
             <span className="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-brand-100/80 text-xs font-mono uppercase tracking-wider px-4 py-1.5 rounded-full" data-testid="hero-badge-iso">
-              <Award className="w-3.5 h-3.5" /> Berasuransi BUMIDA
+              <Award className="w-3.5 h-3.5" /> {t("Berasuransi BUMIDA", "BUMIDA Insured")}
             </span>
           </motion.div>
 
-          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1] text-white max-w-4xl" data-testid="hero-headline">
-            <MaskedLine delay={0.2}>Limbah B3 Terkelola,</MaskedLine>
-            <MaskedLine delay={0.35}><span className="text-brand-500">Lingkungan Terjaga,</span></MaskedLine>
-            <MaskedLine delay={0.5}>Masa Depan Berkelanjutan.</MaskedLine>
+          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1] text-white max-w-4xl" data-testid="hero-headline" key={`h1-${lang}`}>
+            <MaskedLine delay={0.2}>{t("Limbah B3 Terkelola,", "B3 Waste Managed,")}</MaskedLine>
+            <MaskedLine delay={0.35}><span className="text-brand-500">{t("Lingkungan Terjaga,", "Environment Protected,")}</span></MaskedLine>
+            <MaskedLine delay={0.5}>{t("Masa Depan Berkelanjutan.", "Future Sustained.")}</MaskedLine>
           </h1>
 
           <motion.p
+            key={`sub-${lang}`}
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.75, duration: 0.7 }}
             className="mt-7 text-base lg:text-lg leading-relaxed text-brand-100/80 max-w-2xl"
             data-testid="hero-subtext"
           >
-            {COMPANY.name} adalah perusahaan pengangkut dan pengumpul limbah B3 berizin resmi — melayani pengangkutan
-            dan pengumpulan limbah berbahaya dari hub kami di Tarakan dengan armada terpantau GPS.
+            {t(
+              "adalah perusahaan pengangkut dan pengumpul limbah B3 berizin resmi — melayani pengangkutan dan pengumpulan limbah berbahaya dari hub kami di Tarakan dengan armada terpantau GPS.",
+              "is a fully licensed hazardous waste (B3) transporter and collector — serving industrial clients from our hub in Tarakan, North Kalimantan, with a GPS-tracked fleet."
+            ) && `${COMPANY.name} ${t(
+              "adalah perusahaan pengangkut dan pengumpul limbah B3 berizin resmi — melayani pengangkutan dan pengumpulan limbah berbahaya dari hub kami di Tarakan dengan armada terpantau GPS.",
+              "is a fully licensed hazardous waste (B3) transporter and collector — serving industrial clients from our hub in Tarakan, North Kalimantan, with a GPS-tracked fleet."
+            )}`}
           </motion.p>
 
           <motion.div
@@ -130,14 +141,14 @@ export default function Home() {
               data-testid="hero-cta-konsultasi"
               className="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-500 text-white font-semibold px-7 py-3.5 rounded-full transition-colors duration-300"
             >
-              Konsultasi Gratis <ArrowRight className="w-4 h-4" />
+              {t("Konsultasi Gratis", "Free Consultation")} <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
               to="/layanan"
               data-testid="hero-cta-layanan"
               className="inline-flex items-center gap-2 border border-white/30 hover:border-brand-500 hover:text-brand-500 text-white font-semibold px-7 py-3.5 rounded-full transition-colors duration-300"
             >
-              Jelajahi Layanan <ArrowUpRight className="w-4 h-4" />
+              {t("Jelajahi Layanan", "Explore Services")} <ArrowUpRight className="w-4 h-4" />
             </Link>
           </motion.div>
 
@@ -168,33 +179,39 @@ export default function Home() {
               <div className="absolute -inset-4 bg-brand-100 rounded-[2rem] rotate-2" />
               <img
                 src={HERO_IMAGES.facility}
-                alt="Fasilitas penyimpanan limbah B3 berizin KLHK"
+                alt={t("Fasilitas penyimpanan limbah B3 berizin", "Licensed B3 waste storage facility")}
                 className="relative rounded-[1.5rem] w-full aspect-[4/3] object-cover shadow-xl"
                 loading="lazy"
               />
               <div className="absolute -bottom-6 -right-4 lg:-right-6 bg-brand-950 text-white rounded-2xl px-6 py-4 shadow-2xl">
                 <p className="font-display text-2xl font-extrabold text-brand-500">2015</p>
-                <p className="text-xs text-brand-100/60 font-mono uppercase tracking-wider">Berdiri Sejak</p>
+                <p className="text-xs text-brand-100/60 font-mono uppercase tracking-wider">{t("Berdiri Sejak", "Established")}</p>
               </div>
             </div>
           </Reveal>
           <div>
             <Reveal>
-              <SectionLabel>Tentang Kami</SectionLabel>
+              <SectionLabel>{t("Tentang Kami", "About Us")}</SectionLabel>
               <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-brand-950">
-                Satu Dekade Menjaga Industri & Lingkungan Kalimantan
+                {t("Satu Dekade Menjaga Industri & Lingkungan Kalimantan", "A Decade Serving Industry & the Environment of Kalimantan")}
               </h2>
             </Reveal>
             <Reveal delay={0.15}>
               <p className="mt-6 text-base leading-relaxed text-slate-700">
-                Berdiri di Tarakan, Kalimantan Utara sejak 2015, {COMPANY.name} melayani pengangkutan dan
-                pengumpulan limbah B3 bagi industri di Kalimantan dan sekitarnya — didukung izin KLHK, Kemenhub,
-                DLH, serta perlindungan asuransi BUMIDA untuk setiap pekerjaan.
+                {t(
+                  `Berdiri di Tarakan, Kalimantan Utara sejak 2015, ${COMPANY.name} melayani pengangkutan dan pengumpulan limbah B3 bagi industri di Kalimantan dan sekitarnya — didukung izin KLHK, Kemenhub, DLH, serta perlindungan asuransi BUMIDA untuk setiap pekerjaan.`,
+                  `Established in Tarakan, North Kalimantan in 2015, ${COMPANY.name} provides B3 waste transport and collection services for industries across Kalimantan and beyond — backed by KLHK, Ministry of Transportation, and DLH licenses, plus BUMIDA insurance on every job.`
+                )}
               </p>
             </Reveal>
             <Reveal delay={0.25}>
               <div className="mt-8 grid grid-cols-2 gap-4">
-                {["Izin KLHK & Kemenhub", "Armada GPS Real-Time", "Asuransi BUMIDA", "Zero-Leak Guarantee"].map((item) => (
+                {[
+                  t("Izin KLHK & Kemenhub", "KLHK & MoT Licensed"),
+                  t("Armada GPS Real-Time", "Real-Time GPS Fleet"),
+                  t("Asuransi BUMIDA", "BUMIDA Insurance"),
+                  "Zero-Leak Guarantee",
+                ].map((item) => (
                   <div key={item} className="flex items-center gap-2.5 text-sm font-medium text-brand-950">
                     <ShieldCheck className="w-4 h-4 text-brand-600 shrink-0" /> {item}
                   </div>
@@ -207,7 +224,7 @@ export default function Home() {
                 data-testid="about-readmore"
                 className="mt-9 inline-flex items-center gap-2 text-brand-600 font-semibold text-sm group"
               >
-                Kenali Kami Lebih Dekat
+                {t("Kenali Kami Lebih Dekat", "Get to Know Us Better")}
                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5" />
               </Link>
             </Reveal>
@@ -219,9 +236,9 @@ export default function Home() {
       <section className="py-20 lg:py-24 bg-white border-y border-brand-100" data-testid="home-partners">
         <div className="max-w-7xl mx-auto px-5 lg:px-8">
           <Reveal>
-            <SectionLabel>Dipercaya Oleh</SectionLabel>
+            <SectionLabel>{t("Dipercaya Oleh", "Trusted By")}</SectionLabel>
             <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-brand-950 max-w-2xl mb-12">
-              100+ Mitra Industri & Fasilitas Kesehatan
+              {t("100+ Mitra Industri & Fasilitas Kesehatan", "100+ Industrial & Healthcare Partners")}
             </h2>
           </Reveal>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4" data-testid="partners-grid">
@@ -231,7 +248,7 @@ export default function Home() {
                   <span className="w-9 h-9 shrink-0 rounded-lg bg-brand-900 text-brand-500 font-display font-bold text-xs flex items-center justify-center">
                     {partnerInitials(m)}
                   </span>
-                  <span className="text-sm font-medium text-brand-950 leading-snug">{m}</span>
+                  <span className="text-sm font-medium text-brand-950 leading-snug">{t(m, m)}</span>
                 </div>
               </Reveal>
             ))}
@@ -240,16 +257,16 @@ export default function Home() {
       </section>
 
       {/* ============ LAYANAN ============ */}
-      <section className="py-24 lg:py-28 bg-white" data-testid="home-services">
+      <section className="py-24 lg:py-28" data-testid="home-services">
         <div className="max-w-7xl mx-auto px-5 lg:px-8">
           <Reveal>
-            <SectionLabel>Layanan Kami</SectionLabel>
+            <SectionLabel>{t("Layanan Kami", "Our Services")}</SectionLabel>
             <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-14">
               <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-brand-950 max-w-xl">
-                Solusi Limbah B3 Menyeluruh, Dari Penjemputan Hingga Pelaporan
+                {t("Solusi Limbah B3 Menyeluruh, Dari Penjemputan Hingga Pelaporan", "End-to-End B3 Waste Solutions, From Pickup to Reporting")}
               </h2>
               <Link to="/layanan" data-testid="services-viewall" className="inline-flex items-center gap-2 text-brand-600 font-semibold text-sm group shrink-0">
-                Lihat Semua Layanan
+                {t("Lihat Semua Layanan", "View All Services")}
                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5" />
               </Link>
             </div>
@@ -260,7 +277,7 @@ export default function Home() {
                 <Link
                   to={card.to}
                   data-testid={card.id}
-                  className="group block bg-brand-50 hover:bg-brand-950 rounded-2xl p-7 h-full transition-colors duration-500"
+                  className="group block bg-white border border-brand-100 hover:bg-brand-950 hover:border-brand-950 rounded-2xl p-7 h-full transition-colors duration-500"
                 >
                   <card.icon className="w-8 h-8 text-brand-600 group-hover:text-brand-500 transition-colors duration-500" />
                   <h3 className="mt-5 font-display text-lg font-bold text-brand-950 group-hover:text-white transition-colors duration-500">
@@ -278,12 +295,12 @@ export default function Home() {
       </section>
 
       {/* ============ ARMADA ============ */}
-      <section className="py-24 lg:py-28" data-testid="home-fleet">
+      <section className="py-24 lg:py-28 bg-brand-50" data-testid="home-fleet">
         <div className="max-w-7xl mx-auto px-5 lg:px-8">
           <Reveal>
-            <SectionLabel>Armada Kami</SectionLabel>
+            <SectionLabel>{t("Armada Kami", "Our Fleet")}</SectionLabel>
             <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-brand-950 mb-12 max-w-xl">
-              Armada Khusus Limbah B3, Terpantau Setiap Kilometer
+              {t("Armada Khusus Limbah B3, Terpantau Setiap Kilometer", "Dedicated B3 Waste Fleet, Tracked Every Kilometer")}
             </h2>
           </Reveal>
           <Reveal delay={0.15}>
@@ -296,13 +313,13 @@ export default function Home() {
       <section className="py-24 lg:py-28 bg-brand-950 grain-overlay relative" data-testid="home-legalitas">
         <div className="max-w-7xl mx-auto px-5 lg:px-8">
           <Reveal>
-            <SectionLabel>Legalitas</SectionLabel>
+            <SectionLabel>{t("Legalitas", "Legality")}</SectionLabel>
             <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-14">
               <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white max-w-xl">
-                Berizin Lengkap. Teraudit. Terpercaya.
+                {t("Berizin Lengkap. Teraudit. Terpercaya.", "Fully Licensed. Audited. Trusted.")}
               </h2>
               <Link to="/legalitas" data-testid="legalitas-viewall" className="inline-flex items-center gap-2 text-brand-500 font-semibold text-sm group shrink-0">
-                Lihat Semua Perizinan
+                {t("Lihat Semua Perizinan", "View All Permits")}
                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5" />
               </Link>
             </div>
@@ -326,13 +343,13 @@ export default function Home() {
       <section className="py-24 lg:py-28 bg-white" data-testid="home-gallery">
         <div className="max-w-7xl mx-auto px-5 lg:px-8">
           <Reveal>
-            <SectionLabel>Galeri</SectionLabel>
+            <SectionLabel>{t("Galeri", "Gallery")}</SectionLabel>
             <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-14">
               <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-brand-950 max-w-xl">
-                Operasional Kami, Dalam Bingkai
+                {t("Operasional Kami, Dalam Bingkai", "Our Operations, Framed")}
               </h2>
               <Link to="/galeri" data-testid="gallery-viewall" className="inline-flex items-center gap-2 text-brand-600 font-semibold text-sm group shrink-0">
-                Lihat Galeri Lengkap
+                {t("Lihat Galeri Lengkap", "View Full Gallery")}
                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5" />
               </Link>
             </div>
@@ -361,18 +378,18 @@ export default function Home() {
       <section className="py-24 lg:py-28" data-testid="home-news">
         <div className="max-w-7xl mx-auto px-5 lg:px-8">
           <Reveal>
-            <SectionLabel>Berita & Kegiatan</SectionLabel>
+            <SectionLabel>{t("Berita & Kegiatan", "News & Activities")}</SectionLabel>
             <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-14">
               <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-brand-950 max-w-xl">
-                Kabar Terbaru dari Lapangan
+                {t("Kabar Terbaru dari Lapangan", "Latest From the Field")}
               </h2>
               <Link to="/berita" data-testid="news-viewall" className="inline-flex items-center gap-2 text-brand-600 font-semibold text-sm group shrink-0">
-                Baca Semua Berita
+                {t("Baca Semua Berita", "Read All News")}
                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5" />
               </Link>
             </div>
           </Reveal>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
             {news.map((item, i) => (
               <Reveal key={item.id} delay={i * 0.1}>
                 <Link to={`/berita/${item.slug}`} data-testid={`news-card-${item.slug}`} className="group block bg-white rounded-2xl overflow-hidden border border-brand-100 hover:shadow-xl hover:shadow-brand-950/10 transition-shadow duration-500 h-full">
@@ -388,6 +405,11 @@ export default function Home() {
               </Reveal>
             ))}
           </div>
+          {lang === "en" && (
+            <p className="mt-8 text-xs text-brand-950/50 font-mono uppercase tracking-wider" data-testid="news-lang-note">
+              * News articles are published in Bahasa Indonesia
+            </p>
+          )}
         </div>
       </section>
 
@@ -396,29 +418,32 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-5 lg:px-8 text-left lg:text-center">
           <Reveal>
             <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white max-w-3xl lg:mx-auto">
-              Limbah B3 Perusahaan Anda, Tanggung Jawab Kami.
+              {t("Limbah B3 Perusahaan Anda, Tanggung Jawab Kami.", "Your Company's B3 Waste, Our Responsibility.")}
             </h2>
             <p className="mt-5 text-base text-brand-100/70 max-w-xl lg:mx-auto">
-              Konsultasikan kebutuhan pengangkutan dan pengelolaan limbah B3 Anda hari ini — gratis, tanpa komitmen.
+              {t(
+                "Konsultasikan kebutuhan pengangkutan dan pengelolaan limbah B3 Anda hari ini — gratis, tanpa komitmen.",
+                "Discuss your B3 waste transport and management needs today — free, no commitment."
+              )}
             </p>
           </Reveal>
           <Reveal delay={0.15}>
             <div className="mt-9 flex flex-wrap lg:justify-center gap-4">
               <a
-                href={`https://wa.me/${COMPANY.whatsapp}?text=${encodeURIComponent(COMPANY.whatsappMessage)}`}
+                href={waLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 data-testid="cta-whatsapp"
                 className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#1ebe5b] text-white font-semibold px-7 py-3.5 rounded-full transition-colors duration-300"
               >
-                Chat WhatsApp Sekarang
+                {t("Chat WhatsApp Sekarang", "Chat on WhatsApp Now")}
               </a>
               <Link
                 to="/kontak"
                 data-testid="cta-contact-form"
                 className="inline-flex items-center gap-2 border border-white/30 hover:border-brand-500 hover:text-brand-500 text-white font-semibold px-7 py-3.5 rounded-full transition-colors duration-300"
               >
-                Kirim Pesan via Formulir
+                {t("Kirim Pesan via Formulir", "Send a Message via Form")}
               </Link>
             </div>
           </Reveal>

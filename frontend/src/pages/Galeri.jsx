@@ -2,10 +2,10 @@ import { useEffect, useMemo, useState } from "react";
 import { SEO } from "@/components/SEO";
 import { Reveal, SectionLabel } from "@/components/Reveal";
 import { api, imgUrl } from "@/lib/api";
-
-const FILTERS = ["Semua", "Armada", "Fasilitas", "Operasional", "CSR & Safety"];
+import { useLang } from "@/context/LanguageContext";
 
 export default function Galeri() {
+  const { lang, t } = useLang();
   const [items, setItems] = useState([]);
   const [filter, setFilter] = useState("Semua");
   const [loading, setLoading] = useState(true);
@@ -18,25 +18,31 @@ export default function Galeri() {
       .finally(() => setLoading(false));
   }, []);
 
+  const filters = [t("Semua", "All"), "Armada", "Fasilitas", "Operasional", "CSR & Safety"];
+  const allLabel = t("Semua", "All");
+
   const filtered = useMemo(
-    () => (filter === "Semua" ? items : items.filter((i) => i.category === filter)),
-    [items, filter]
+    () => (filter === allLabel || filter === "Semua" ? items : items.filter((i) => i.category === filter)),
+    [items, filter, allLabel]
   );
 
   return (
     <div data-testid="galeri-page">
       <SEO
-        title="Galeri"
-        description="Dokumentasi armada, fasilitas penyimpanan limbah B3, dan kegiatan operasional PT Nusa Enviro Lestari."
+        title={t("Galeri", "Gallery")}
+        description={t(
+          "Dokumentasi armada, fasilitas TPS limbah B3, dan kegiatan operasional PT Kaltara Jaya Makmur.",
+          "Documentation of the fleet, B3 waste TPS facilities, and operations of PT Kaltara Jaya Makmur."
+        )}
         path="/galeri"
       />
 
       <section className="bg-brand-950 grain-overlay relative py-20 lg:py-28">
         <div className="max-w-7xl mx-auto px-5 lg:px-8">
           <Reveal>
-            <SectionLabel>Galeri</SectionLabel>
+            <SectionLabel>{t("Galeri", "Gallery")}</SectionLabel>
             <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1] text-white max-w-3xl">
-              Armada & Fasilitas <span className="text-brand-500">Dalam Bingkai</span>
+              {t("Armada & Fasilitas", "Fleet & Facilities")} <span className="text-brand-500">{t("Dalam Bingkai", "Framed")}</span>
             </h1>
           </Reveal>
         </div>
@@ -45,13 +51,13 @@ export default function Galeri() {
       <section className="py-20 lg:py-24">
         <div className="max-w-7xl mx-auto px-5 lg:px-8">
           <div className="flex flex-wrap gap-3 mb-12" data-testid="gallery-filters">
-            {FILTERS.map((f) => (
+            {filters.map((f) => (
               <button
                 key={f}
                 onClick={() => setFilter(f)}
                 data-testid={`gallery-filter-${f.toLowerCase().replace(/[^a-z]/g, "-")}`}
                 className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
-                  filter === f
+                  (filter === f || (f === allLabel && filter === "Semua"))
                     ? "bg-brand-900 text-white shadow-lg shadow-brand-900/20"
                     : "bg-white text-brand-950/60 border border-brand-100 hover:border-brand-600 hover:text-brand-600"
                 }`}
@@ -62,9 +68,9 @@ export default function Galeri() {
           </div>
 
           {loading ? (
-            <p className="text-sm text-slate-500" data-testid="gallery-loading">Memuat galeri…</p>
+            <p className="text-sm text-slate-500" data-testid="gallery-loading">{t("Memuat galeri…", "Loading gallery…")}</p>
           ) : filtered.length === 0 ? (
-            <p className="text-sm text-slate-500" data-testid="gallery-empty">Belum ada foto pada kategori ini.</p>
+            <p className="text-sm text-slate-500" data-testid="gallery-empty">{t("Belum ada foto pada kategori ini.", "No photos in this category yet.")}</p>
           ) : (
             <div className="columns-1 sm:columns-2 lg:columns-3 gap-5" data-testid="gallery-grid">
               {filtered.map((item, i) => (

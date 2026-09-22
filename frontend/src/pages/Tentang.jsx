@@ -1,29 +1,29 @@
 import { Target, Compass, HeartHandshake } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { Reveal, SectionLabel } from "@/components/Reveal";
-import { COMPANY, PROFIL, HERO_IMAGES } from "@/data/company";
-
-const CHAPTERS = [
-  { no: "01", icon: Target, id: "visi-misi", judul: "Visi Kami" },
-  { no: "02", icon: Compass, judul: "Misi Kami" },
-  { no: "03", icon: HeartHandshake, id: "nilai", judul: "Nilai Kami" },
-];
+import { useLang } from "@/context/LanguageContext";
 
 export default function Tentang() {
+  const { t, data } = useLang();
+  const { COMPANY, PROFIL, HERO_IMAGES } = data;
+
   return (
     <div data-testid="tentang-page">
       <SEO
-        title="Tentang Kami"
-        description={`Profil, visi, misi, dan nilai ${COMPANY.name} — perusahaan pengelola dan pengangkut limbah B3 berizin KLHK sejak 2013.`}
+        title={t("Tentang Kami", "About Us")}
+        description={t(
+          `Profil, visi, misi, dan nilai ${COMPANY.name} — perusahaan pengangkut dan pengumpul limbah B3 berizin di Tarakan, Kalimantan Utara.`,
+          `Profile, vision, mission, and values of ${COMPANY.name} — a licensed B3 waste transporter and collector in Tarakan, North Kalimantan.`
+        )}
         path="/tentang-kami"
       />
 
       <section className="bg-brand-950 grain-overlay relative py-20 lg:py-28">
         <div className="max-w-7xl mx-auto px-5 lg:px-8">
           <Reveal>
-            <SectionLabel>Tentang Kami</SectionLabel>
+            <SectionLabel>{t("Tentang Kami", "About Us")}</SectionLabel>
             <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1] text-white max-w-3xl">
-              Mengenal <span className="text-brand-500">{COMPANY.shortName}</span> Lebih Dekat
+              {t("Mengenal", "Get to Know")} <span className="text-brand-500">{COMPANY.shortName}</span> {t("Lebih Dekat", "Better")}
             </h1>
           </Reveal>
         </div>
@@ -34,9 +34,9 @@ export default function Tentang() {
         <div className="max-w-7xl mx-auto px-5 lg:px-8 grid lg:grid-cols-2 gap-14 items-start">
           <div>
             <Reveal>
-              <SectionLabel>Profil Perusahaan</SectionLabel>
+              <SectionLabel>{t("Profil Perusahaan", "Company Profile")}</SectionLabel>
               <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-brand-950 mb-8">
-                Melayani dengan Integritas Sejak 2015
+                {t("Melayani dengan Integritas Sejak 2015", "Serving with Integrity Since 2015")}
               </h2>
             </Reveal>
             {PROFIL.sejarah.map((p, i) => (
@@ -50,7 +50,7 @@ export default function Tentang() {
               <div className="absolute -inset-4 bg-brand-100 rounded-[2rem] -rotate-2" />
               <img
                 src={HERO_IMAGES.plant}
-                alt="Fasilitas pengelolaan limbah B3 PT Nusa Enviro Lestari"
+                alt={t("Fasilitas pengelolaan limbah B3 PT Kaltara Jaya Makmur", "PT Kaltara Jaya Makmur B3 waste facility")}
                 className="relative rounded-[1.5rem] w-full aspect-[4/3] object-cover shadow-xl"
                 loading="lazy"
               />
@@ -63,15 +63,15 @@ export default function Tentang() {
       <section id="visi-misi" className="py-24 lg:py-28 bg-white scroll-mt-24" data-testid="visi-misi-section">
         <div className="max-w-7xl mx-auto px-5 lg:px-8">
           <Reveal>
-            <SectionLabel>Manifesto Kami</SectionLabel>
+            <SectionLabel>{t("Manifesto Kami", "Our Manifesto")}</SectionLabel>
           </Reveal>
           <div className="space-y-0">
             <Reveal>
               <div className="grid lg:grid-cols-12 gap-6 py-12 border-t border-brand-100">
                 <div className="lg:col-span-3">
-                  <p className="font-mono text-sm text-brand-600 tracking-wider">{CHAPTERS[0].no}</p>
+                  <p className="font-mono text-sm text-brand-600 tracking-wider">01</p>
                   <h2 className="font-display text-2xl sm:text-3xl font-bold text-brand-950 mt-2 flex items-center gap-3">
-                    <Target className="w-7 h-7 text-brand-600" /> Visi
+                    <Target className="w-7 h-7 text-brand-600" /> {t("Visi", "Vision")}
                   </h2>
                 </div>
                 <p className="lg:col-span-9 font-display text-xl sm:text-2xl lg:text-3xl font-bold text-brand-950 leading-snug max-w-3xl" data-testid="visi-text">
@@ -82,9 +82,9 @@ export default function Tentang() {
             <Reveal delay={0.1}>
               <div className="grid lg:grid-cols-12 gap-6 py-12 border-t border-brand-100">
                 <div className="lg:col-span-3">
-                  <p className="font-mono text-sm text-brand-600 tracking-wider">{CHAPTERS[1].no}</p>
+                  <p className="font-mono text-sm text-brand-600 tracking-wider">02</p>
                   <h2 className="font-display text-2xl sm:text-3xl font-bold text-brand-950 mt-2 flex items-center gap-3">
-                    <Compass className="w-7 h-7 text-brand-600" /> Misi
+                    <Compass className="w-7 h-7 text-brand-600" /> {t("Misi", "Mission")}
                   </h2>
                 </div>
                 <ol className="lg:col-span-9 space-y-5" data-testid="misi-list">
@@ -108,12 +108,15 @@ export default function Tentang() {
             <Reveal>
               <p className="font-mono text-sm text-brand-600 tracking-wider">03</p>
               <h2 className="font-display text-2xl sm:text-3xl font-bold text-brand-950 mt-2 flex items-center gap-3">
-                <HeartHandshake className="w-7 h-7 text-brand-600" /> Nilai Perusahaan
+                <HeartHandshake className="w-7 h-7 text-brand-600" /> {t("Nilai Perusahaan", "Company Values")}
               </h2>
             </Reveal>
             <Reveal delay={0.1}>
               <p className="mt-4 text-base leading-relaxed text-slate-700">
-                Empat nilai yang menjadi kompas setiap keputusan operasional kami — dari pengemudi di lapangan hingga jajaran manajemen.
+                {t(
+                  "Empat nilai yang menjadi kompas setiap keputusan operasional kami — dari pengemudi di lapangan hingga jajaran manajemen.",
+                  "Four values that guide every operational decision we make — from drivers in the field to the management team."
+                )}
               </p>
             </Reveal>
           </div>

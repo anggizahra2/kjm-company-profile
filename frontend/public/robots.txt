@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin
 
-Sitemap: https://b3-care-portal.preview.emergentagent.com/api/sitemap.xml
+Sitemap: https://kaltarajayamakmur.co.id/api/sitemap.xml

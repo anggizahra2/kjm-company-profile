@@ -8,9 +8,7 @@ export const SEO = ({ title, description, path = "/", type = "website", image })
     ? `${title} | ${COMPANY.name}`
     : `${COMPANY.name} — Pengangkutan & Pengelolaan Limbah B3 Berizin KLHK`;
   const desc = description || COMPANY.description;
-  const ogImage =
-    image ||
-    "https://images.unsplash.com/photo-1700891271072-03bef644f435?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85";
+  const ogImage = image || `${origin}/images/hero-armada.webp`;
 
   return (
     <Helmet>

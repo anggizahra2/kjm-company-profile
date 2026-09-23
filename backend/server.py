@@ -13,11 +13,14 @@ from html.parser import HTMLParser
 from typing import Annotated, Optional
 from urllib.parse import urlparse
 
+import base64
+import json
+import smtplib
+from email.message import EmailMessage
+
 import bcrypt
-import httpx
 import jwt
-import requests
-from bson import ObjectId
+from bson import Binary, ObjectId
 from fastapi import APIRouter, Depends, FastAPI, File, HTTPException, Request, Response, UploadFile
 from motor.motor_asyncio import AsyncIOMotorClient
 from pydantic import BaseModel, BeforeValidator, ConfigDict, EmailStr, Field
@@ -217,11 +220,13 @@ async def me(user=Depends(get_current_user)):
     return {"id": user["id"], "email": user["email"], "name": user.get("name", "Admin"), "role": user.get("role", "admin")}
 
 
-# ---------------- Email (Emergent managed) ----------------
-EMAIL_BASE_URL = "https://integrations.emergentagent.com"
-EMAIL_KEY = os.environ["EMERGENT_EMAIL_KEY"]
-EMAIL_FROM_NAME = os.environ["EMAIL_FROM_NAME"]
+# ---------------- Email (SMTP opsional — Gmail dsb) ----------------
+EMAIL_FROM_NAME = os.environ.get("EMAIL_FROM_NAME", "Website KJM")
 EMAIL_REPLY_TO = os.environ.get("EMAIL_REPLY_TO")
+SMTP_HOST = os.environ.get("SMTP_HOST", "smtp.gmail.com")
+SMTP_PORT = int(os.environ.get("SMTP_PORT", "465"))
+SMTP_USER = os.environ.get("SMTP_USER")
+SMTP_PASS = os.environ.get("SMTP_PASS")
 
 _SHORTENERS = ("bit.ly", "tinyurl.com", "t.co", "is.gd", "cutt.ly", "goo.gl", "rebrand.ly")
 _CRED_ASK = ("reply with your password", "reply with the code", "send your password", "cvv",
@@ -298,58 +303,38 @@ def _assert_safe_email(subject: str, html: str) -> None:
 
 async def send_email(*, to: str, subject: str, html: str, reply_to: Optional[str] = None) -> Optional[str]:
     _assert_safe_email(subject, html)
-    payload = {"to": [to], "subject": subject, "html": html, "from_name": EMAIL_FROM_NAME}
-    if reply_to or EMAIL_REPLY_TO:
-        payload["contact_email"] = reply_to or EMAIL_REPLY_TO
+    if not SMTP_USER or not SMTP_PASS:
+        logger.warning("SMTP belum dikonfigurasi — email tidak dikirim (pesan tetap tersimpan di database)")
+        return None
+
+    def _send() -> str:
+        msg = EmailMessage()
+        msg["Subject"] = subject
+        msg["From"] = f"{EMAIL_FROM_NAME} <{SMTP_USER}>"
+        msg["To"] = to
+        if reply_to or EMAIL_REPLY_TO:
+            msg["Reply-To"] = reply_to or EMAIL_REPLY_TO
+        msg.set_content("Pesan ini membutuhkan tampilan HTML.")
+        msg.add_alternative(html, subtype="html")
+        with smtplib.SMTP_SSL(SMTP_HOST, SMTP_PORT, timeout=30) as smtp:
+            smtp.login(SMTP_USER, SMTP_PASS)
+            smtp.send_message(msg)
+        return "sent"
+
     try:
-        async with httpx.AsyncClient(timeout=30) as client_http:
-            resp = await client_http.post(
-                f"{EMAIL_BASE_URL}/api/v1/email/send",
-                headers={"X-Email-Key": EMAIL_KEY},
-                json=payload,
-            )
-        resp.raise_for_status()
-        return resp.json().get("id")
+        return await asyncio.to_thread(_send)
     except Exception as e:
         logger.error("Email send error: %s", str(e))
         raise HTTPException(status_code=502, detail="Failed to send email")
 
 
-# ---------------- Object storage (Emergent) ----------------
-STORAGE_BASE = (os.environ.get("INTEGRATION_PROXY_URL") or "").strip() or "https://integrations.emergentagent.com"
-STORAGE_URL = STORAGE_BASE.rstrip("/") + "/objstore/api/v1/storage"
-EMERGENT_KEY = os.environ.get("EMERGENT_LLM_KEY")
+# ---------------- File storage (MongoDB) ----------------
 APP_NAME = "nusa-enviro-lestari"
-storage_key = None
 
 MIME_TYPES = {
     "jpg": "image/jpeg", "jpeg": "image/jpeg", "png": "image/png",
     "gif": "image/gif", "webp": "image/webp",
 }
-
-
-def init_storage(force: bool = False):
-    global storage_key
-    if storage_key and not force:
-        return storage_key
-    resp = requests.post(f"{STORAGE_URL}/init", json={"emergent_key": EMERGENT_KEY}, timeout=30)
-    resp.raise_for_status()
-    storage_key = resp.json()["storage_key"]
-    return storage_key
-
-
-def put_object(path: str, data: bytes, content_type: str) -> dict:
-    key = init_storage()
-    resp = requests.put(f"{STORAGE_URL}/objects/{path}", headers={"X-Storage-Key": key, "Content-Type": content_type}, data=data, timeout=120)
-    resp.raise_for_status()
-    return resp.json()
-
-
-def get_object(path: str):
-    key = init_storage()
-    resp = requests.get(f"{STORAGE_URL}/objects/{path}", headers={"X-Storage-Key": key}, timeout=60)
-    resp.raise_for_status()
-    return resp.content, resp.headers.get("Content-Type", "application/octet-stream")
 
 
 @api_router.post("/admin/upload")
@@ -362,19 +347,18 @@ async def admin_upload(file: UploadFile = File(...), user=Depends(get_current_us
     if len(data) > 10 * 1024 * 1024:
         raise HTTPException(status_code=400, detail="Ukuran file maksimal 10MB")
     path = f"{APP_NAME}/uploads/{user['id']}/{uuid.uuid4()}.{ext}"
-    result = await asyncio.to_thread(put_object, path, data, mime)
-    record = FileRecord(storage_path=result["path"], original_filename=file.filename or "", content_type=mime, size=result.get("size", len(data)))
-    await db.files.insert_one(record.to_mongo())
-    return {"path": result["path"], "size": result.get("size", len(data))}
+    doc = FileRecord(storage_path=path, original_filename=file.filename or "", content_type=mime, size=len(data)).to_mongo()
+    doc["data"] = Binary(data)
+    await db.files.insert_one(doc)
+    return {"path": path, "size": len(data)}
 
 
 @api_router.get("/files/{path:path}")
 async def serve_file(path: str):
     record = await db.files.find_one({"storage_path": path, "is_deleted": False})
-    if not record:
+    if not record or not record.get("data"):
         raise HTTPException(status_code=404, detail="File tidak ditemukan")
-    data, content_type = await asyncio.to_thread(get_object, path)
-    return Response(content=data, media_type=record.get("content_type") or content_type)
+    return Response(content=bytes(record["data"]), media_type=record.get("content_type") or "application/octet-stream")
 
 
 # ---------------- News (Berita) ----------------
@@ -556,18 +540,48 @@ async def seed_content():
 
 
 # ---------------- Startup / shutdown ----------------
+SEED_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "seed_data.json")
+
+
+async def import_seed_data() -> bool:
+    """Impor konten asli (berita, galeri, gambar) saat deploy baru ke database kosong."""
+    if not os.path.exists(SEED_FILE):
+        return False
+    if await db.news.count_documents({}) > 0:
+        return False
+    with open(SEED_FILE) as fp:
+        seed = json.load(fp)
+    for n in seed.get("news", []):
+        n["_id"] = ObjectId(n["_id"])
+        n["created_at"] = datetime.fromisoformat(n["created_at"])
+    for g in seed.get("gallery", []):
+        g["_id"] = ObjectId(g["_id"])
+        g["created_at"] = datetime.fromisoformat(g["created_at"])
+    files = []
+    for f in seed.get("files", []):
+        f["_id"] = ObjectId(f["_id"])
+        f["created_at"] = datetime.fromisoformat(f["created_at"])
+        f["data"] = Binary(base64.b64decode(f.pop("data_b64")))
+        files.append(f)
+    if seed.get("news"):
+        await db.news.insert_many(seed["news"])
+    if seed.get("gallery"):
+        await db.gallery.insert_many(seed["gallery"])
+    if files:
+        await db.files.insert_many(files)
+    logger.info("Seed data imported: %d berita, %d galeri, %d file", len(seed.get("news", [])), len(seed.get("gallery", [])), len(files))
+    return True
+
+
 @app.on_event("startup")
 async def startup():
     await db.users.create_index("email", unique=True)
     await db.news.create_index("slug", unique=True)
     await db.login_attempts.create_index("identifier")
     await seed_admin()
-    await seed_content()
-    try:
-        await asyncio.to_thread(init_storage)
-        logger.info("Storage initialized")
-    except Exception as e:
-        logger.error("Storage init failed: %s", e)
+    imported = await import_seed_data()
+    if not imported:
+        await seed_content()
 
 
 @app.on_event("shutdown")

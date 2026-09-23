@@ -42,7 +42,7 @@ Buka http://localhost:3000 — API di http://localhost:8001/api
 Buka http://localhost:3000/admin/login — email & password sesuai `ADMIN_EMAIL` / `ADMIN_PASSWORD` di `backend/.env` (akun otomatis dibuat saat backend pertama jalan).
 
 ### Catatan
-- Fitur **form kontak (email)** dan **upload foto** memakai layanan integrasi eksternal (isi `EMERGENT_EMAIL_KEY` & `EMERGENT_LLM_KEY` di `.env`). Tanpa key tersebut, website tetap jalan normal; hanya email & upload yang nonaktif.
+- **Upload foto** disimpan langsung di MongoDB (tanpa layanan eksternal). **Form kontak** mengirim email via SMTP — isi `SMTP_USER` & `SMTP_PASS` (App Password Gmail) di `.env`. Tanpa SMTP, website tetap jalan normal dan pesan kontak tetap tersimpan di database.
 - Data perusahaan (alamat, WA, legalitas, armada, mitra) terpusat di `frontend/src/data/company.js`.
 - Panduan lengkap sampai muncul di Google: baca **PANDUAN_DEPLOY_SEO.md**.
 

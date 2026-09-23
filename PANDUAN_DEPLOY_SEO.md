@@ -34,12 +34,66 @@ Semua data contoh terpusat dan mudah diganti:
 1. Klik tombol **Deploy** di dashboard platform tempat web ini dibangun.
 2. Website langsung online dengan URL permanen bawaan platform.
 3. Semua fitur (CMS admin, form kontak, galeri) langsung jalan.
+4. Biaya: ±50 ECU/bulan.
 
-### Opsi B — Hosting sendiri (Vercel + Render/Railway + MongoDB Atlas)
-1. **Database**: buat akun gratis di mongodb.com/atlas → buat cluster → ambil connection string → isi ke `MONGO_URL` di `backend/.env`.
-2. **Backend**: deploy folder `backend` ke Render.com / Railway → start command: `uvicorn server:app --host 0.0.0.0 --port $PORT` → isi semua environment variable dari `.env`.
-3. **Frontend**: deploy folder `frontend` ke Vercel → build command `yarn build`, output `build` → isi env `REACT_APP_BACKEND_URL` dengan URL backend-mu.
-4. Update `SITE_URL`, `FRONTEND_URL`, canonical URL, dan `robots.txt` dengan domain final.
+### Opsi B — Hosting GRATIS (Vercel + Render + MongoDB Atlas)
+
+Biaya Rp0/bulan. Satu-satunya kekurangan: backend Render gratis "tidur" setelah 15 menit tanpa pengunjung — pengunjung pertama menunggu ±30–60 detik, setelah itu normal. (Bisa di-upgrade berbayar nanti kalau mau selalu instan.)
+
+#### Langkah 1 — Database: MongoDB Atlas (gratis 512MB)
+1. Buka mongodb.com/atlas → Sign up gratis (bisa pakai akun Google).
+2. **Create Cluster** → pilih **M0 FREE** → region Singapore → Create.
+3. Menu **Database Access** → Add New Database User → buat username & password (SIMPAN).
+4. Menu **Network Access** → Add IP Address → **Allow Access from Anywhere** (0.0.0.0/0).
+5. Menu **Database** → Connect → Drivers → salin connection string `mongodb+srv://<username>:<password>@cluster0.xxxx.mongodb.net/` → ganti `<username>` dan `<password>` dengan milikmu.
+6. Tidak perlu import data manual — website otomatis mengisi seluruh konten (14 berita, 34 foto galeri, 37 gambar) dari file `backend/seed_data.json` saat pertama kali jalan.
+
+#### Langkah 2 — Backend: Render (gratis)
+1. Buka render.com → Sign up dengan akun **GitHub** (otomatis tersambung ke repo).
+2. New → **Web Service** → pilih repo `kjm-company-profile`.
+3. Pengaturan:
+   - Root Directory: `backend`
+   - Runtime: Python 3
+   - Build Command: `pip install -r requirements.txt`
+   - Start Command: `uvicorn server:app --host 0.0.0.0 --port $PORT`
+   - Instance Type: **Free**
+4. Menu **Environment** → tambahkan variabel (contoh di `backend/.env.example`):
+   - `MONGO_URL` = connection string Atlas (Langkah 1)
+   - `DB_NAME` = `kjm313_db`
+   - `JWT_SECRET` = teks acak 64 karakter (buat via `openssl rand -hex 32`)
+   - `ADMIN_EMAIL` = `kaltarajayamakmur354@gmail.com`
+   - `ADMIN_PASSWORD` = password admin pilihanmu
+   - `FRONTEND_URL` = `https://kaltarajayamakmur.co.id`
+   - `SITE_URL` = `https://kaltarajayamakmur.co.id`
+   - `EMAIL_FROM_NAME` = `PT Kaltara Jaya Makmur`
+   - `CONTACT_INBOX` = `kaltarajayamakmur354@gmail.com`
+   - `SMTP_HOST` = `smtp.gmail.com`, `SMTP_PORT` = `465`
+   - `SMTP_USER` = `kaltarajayamakmur354@gmail.com`
+   - `SMTP_PASS` = App Password Gmail (cara di bawah)
+5. Deploy → tunggu ±5 menit → dapat URL seperti `https://kjm-backend.onrender.com`. **CATAT URL INI.**
+
+**Cara bikin App Password Gmail (agar form kontak terkirim ke email):**
+1. Login Gmail → myaccount.google.com → **Security**.
+2. Aktifkan **Verifikasi 2 Langkah** dulu (wajib).
+3. Cari "App passwords" / "Sandi Aplikasi" → buat baru, nama "Website KJM" → dapat 16 huruf acak → itulah isi `SMTP_PASS`.
+4. Tanpa ini website tetap jalan; pesan kontak tetap tersimpan di database, hanya email notifikasi yang tidak terkirim.
+
+#### Langkah 3 — Frontend: Vercel (gratis)
+1. Edit file `frontend/vercel.json` di GitHub (klik file → ikon pensil → Commit): ganti `GANTI-DENGAN-URL-BACKEND-RENDER` dengan URL Render dari Langkah 2 (tanpa garis miring di akhir). Ini penting agar sitemap SEO bisa diakses di `domainmu/api/sitemap.xml`.
+2. Buka vercel.com → Sign up dengan akun **GitHub**.
+3. Add New → Project → Import repo `kjm-company-profile`.
+4. Root Directory: klik Edit → pilih `frontend`.
+5. Environment Variables: `REACT_APP_BACKEND_URL` = URL Render dari Langkah 2.
+6. Deploy → ±2 menit → website live di URL `*.vercel.app`.
+
+#### Langkah 4 — Sambungkan domain kaltarajayamakmur.co.id
+1. Di Vercel: Project → Settings → **Domains** → ketik `kaltarajayamakmur.co.id` → Add. Vercel akan menampilkan DNS record yang diminta.
+2. Login panel registrar tempat beli domain (misal Registrindo) → Kelola DNS:
+   - Record **A**: nama `@` → isi `76.76.21.21`
+   - Record **CNAME**: nama `www` → isi `cname.vercel-dns.com`
+   - (atau persis sesuai instruksi Vercel)
+3. Tunggu 10 menit – 24 jam → domain aktif dengan HTTPS otomatis.
+4. Lanjut ke **Bagian 4** (Google Search Console).
 
 ---
 

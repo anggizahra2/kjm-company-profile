@@ -3,7 +3,7 @@ import { Reveal, SectionLabel } from "@/components/Reveal";
 // Hero halaman: tinggi ± setengah hero beranda, foto full-cover dengan overlay brand.
 export const PageHero = ({ label, title, description, image, testid }) => (
   <section
-    className="relative bg-brand-950 grain-overlay overflow-hidden min-h-[300px] sm:min-h-[360px] lg:h-[46vh] lg:min-h-[400px] flex items-center"
+    className="relative bg-brand-950 grain-overlay overflow-hidden min-h-[320px] sm:min-h-[440px] lg:h-[69vh] lg:min-h-[520px] flex items-center"
     data-testid={testid}
   >
     <img

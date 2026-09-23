@@ -16,6 +16,49 @@ const partnerInitials = (name) => {
   return (words.length > 1 ? words[0][0] + words[1][0] : clean.slice(0, 2)).toUpperCase();
 };
 
+const HERO_SLIDES = [
+  "/images/hero-armada.webp",
+  "/images/armada-tangki.webp",
+  "/images/armada-truk-box.webp",
+  "/images/armada-pickup.webp",
+  "/images/armada-bak-terbuka.webp",
+];
+
+const HeroSlideshow = ({ y, alt }) => {
+  const [idx, setIdx] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => setIdx((i) => (i + 1) % HERO_SLIDES.length), 5000);
+    return () => clearInterval(id);
+  }, []);
+  return (
+    <motion.div className="absolute inset-0" style={{ y }} data-testid="hero-slideshow">
+      {HERO_SLIDES.map((src, i) => (
+        <motion.img
+          key={src}
+          src={src}
+          alt={i === 0 ? alt : ""}
+          initial={false}
+          animate={{ opacity: i === idx ? 0.4 : 0 }}
+          transition={{ duration: 1.4, ease: "easeInOut" }}
+          className="absolute inset-0 w-full h-[120%] object-cover"
+        />
+      ))}
+      <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(13,59,62,0.92) 0%, rgba(8,28,29,0.85) 100%)" }} />
+      <div className="absolute bottom-6 right-6 lg:right-8 flex gap-2 z-10" data-testid="hero-slideshow-dots">
+        {HERO_SLIDES.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setIdx(i)}
+            data-testid={`hero-slide-dot-${i}`}
+            aria-label={`Slide ${i + 1}`}
+            className={`h-1.5 rounded-full transition-all duration-500 ${i === idx ? "w-6 bg-brand-500" : "w-1.5 bg-white/40 hover:bg-white/70"}`}
+          />
+        ))}
+      </div>
+    </motion.div>
+  );
+};
+
 const MaskedLine = ({ children, delay = 0 }) => (
   <span className="block overflow-hidden pb-1 -mb-1">
     <motion.span
@@ -82,14 +125,7 @@ export default function Home() {
 
       {/* ============ KINETIC HERO ============ */}
       <section ref={heroRef} className="relative min-h-[92vh] flex items-center overflow-hidden bg-brand-950 grain-overlay" data-testid="hero-section">
-        <motion.div className="absolute inset-0" style={{ y: bgY }}>
-          <img
-            src={HERO_IMAGES.main}
-            alt={t("Armada pengangkut limbah B3 PT Kaltara Jaya Makmur", "PT Kaltara Jaya Makmur B3 waste transport fleet")}
-            className="w-full h-[120%] object-cover opacity-40"
-          />
-          <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(13,59,62,0.92) 0%, rgba(8,28,29,0.85) 100%)" }} />
-        </motion.div>
+        <HeroSlideshow y={bgY} alt={t("Armada pengangkut limbah B3 PT Kaltara Jaya Makmur", "PT Kaltara Jaya Makmur B3 waste transport fleet")} />
 
         <div className="relative max-w-7xl mx-auto px-5 lg:px-8 py-24 w-full">
           <motion.div

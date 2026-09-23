@@ -23,6 +23,7 @@ export const COMPANY = {
     linkedin: "",
     facebook: "",
     youtube: "",
+    x: "",
   },
 };
 

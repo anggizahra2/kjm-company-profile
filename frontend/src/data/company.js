@@ -297,7 +297,7 @@ export const PENGELOLAAN = [
   { judul: "Pengumpulan Limbah B3", deskripsi: "Pengumpulan limbah B3 dari lokasi klien dengan izin resmi dari Dinas Lingkungan Hidup." },
   { judul: "Penyimpanan Sementara (TPS)", deskripsi: "Pool armada dan Tempat Penyimpanan Sementara di Tarakan Timur dengan penanganan sesuai standar." },
   { judul: "Pengangkutan Berizin", deskripsi: "Pengangkutan limbah B3 dengan izin Kementerian Lingkungan Hidup dan Kementerian Perhubungan." },
-  { judul: "Perlindungan Asuransi", deskripsi: "Seluruh kegiatan penyelenggaraan dilindungi Asuransi Pengelolaan Limbah B3 dari Jasindo." },
+  { judul: "Perlindungan Asuransi", deskripsi: "Seluruh kegiatan penyelenggaraan dilindungi Asuransi Pengelolaan Limbah B3 dari BUMIDA." },
 ];
 
 export const MITRA = [

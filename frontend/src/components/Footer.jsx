@@ -32,26 +32,20 @@ export const Footer = () => {
             </div>
             <p className="text-sm leading-relaxed mb-6">{COMPANY.tagline}.</p>
             <div className="flex items-center gap-3">
-              {COMPANY.socials.instagram && (
-                <a href={COMPANY.socials.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" data-testid="social-instagram" className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-600 transition-colors duration-300">
-                  <Instagram className="w-4 h-4" />
+              {SOCIALS.map(({ key, label, Icon }) => (
+                <a
+                  key={key}
+                  href={COMPANY.socials[key] || "#"}
+                  target={COMPANY.socials[key] ? "_blank" : undefined}
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  title={COMPANY.socials[key] ? label : `${label} — segera hadir`}
+                  data-testid={`social-${key}`}
+                  className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-600 transition-colors duration-300"
+                >
+                  <Icon className="w-4 h-4" />
                 </a>
-              )}
-              {COMPANY.socials.linkedin && (
-                <a href={COMPANY.socials.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" data-testid="social-linkedin" className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-600 transition-colors duration-300">
-                  <Linkedin className="w-4 h-4" />
-                </a>
-              )}
-              {COMPANY.socials.facebook && (
-                <a href={COMPANY.socials.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" data-testid="social-facebook" className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-600 transition-colors duration-300">
-                  <Facebook className="w-4 h-4" />
-                </a>
-              )}
-              {COMPANY.socials.youtube && (
-                <a href={COMPANY.socials.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube" data-testid="social-youtube" className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-600 transition-colors duration-300">
-                  <Youtube className="w-4 h-4" />
-                </a>
-              )}
+              ))}
             </div>
           </div>
 

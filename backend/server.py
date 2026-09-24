@@ -301,7 +301,7 @@ def _assert_safe_email(subject: str, html: str) -> None:
                 raise ValueError(f"Anchor text {m.group(1)!r} != real link host {real!r} (G3)")
 
 
-async def send_email(*, to: str, subject: str, html: str, reply_to: Optional[str] = None) -> Optional[str]:
+async def send_email(*, to: str, subject: str, html: str, reply_to: Optional[str] = None, from_name: Optional[str] = None) -> Optional[str]:
     _assert_safe_email(subject, html)
     if not SMTP_USER or not SMTP_PASS:
         logger.warning("SMTP belum dikonfigurasi — email tidak dikirim (pesan tetap tersimpan di database)")
@@ -310,7 +310,7 @@ async def send_email(*, to: str, subject: str, html: str, reply_to: Optional[str
     def _send() -> str:
         msg = EmailMessage()
         msg["Subject"] = subject
-        msg["From"] = f"{EMAIL_FROM_NAME} <{SMTP_USER}>"
+        msg["From"] = f"{from_name or EMAIL_FROM_NAME} <{SMTP_USER}>"
         msg["To"] = to
         if reply_to or EMAIL_REPLY_TO:
             msg["Reply-To"] = reply_to or EMAIL_REPLY_TO
@@ -329,7 +329,7 @@ async def send_email(*, to: str, subject: str, html: str, reply_to: Optional[str
 
 
 # ---------------- File storage (MongoDB) ----------------
-APP_NAME = "nusa-enviro-lestari"
+APP_NAME = "kaltara-jaya-makmur"
 
 MIME_TYPES = {
     "jpg": "image/jpeg", "jpeg": "image/jpeg", "png": "image/png",
@@ -456,7 +456,12 @@ async def submit_contact(input: ContactInput):
         "</td></tr></table>"
     )
     try:
-        await send_email(to=os.environ["CONTACT_INBOX"], subject="Pesan Baru dari Website Company Profile", html=html)
+        await send_email(
+            to=os.environ["CONTACT_INBOX"], 
+            subject=f"Pesan Baru dari {input.name} - Website KJM", 
+            html=html,
+            from_name=f"{input.name} via Website KJM",
+        )
     except Exception as e:
         logger.error("Contact email failed: %s", str(e))
     return {"status": "success", "message": "Terima kasih! Pesan Anda telah kami terima dan akan segera kami balas."}

@@ -1,6 +1,6 @@
 {
   "rewrites": [
-    { "source": "/api/:path*", "destination": "https://GANTI-DENGAN-URL-BACKEND-RENDER.onrender.com/api/:path*" },
+    { "source": "/api/:path*", "destination": "https://kjm-backend-sxhg.onrender.com/api/:path*" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

@@ -7,7 +7,7 @@ export const COMPANY = {
   shortName: "KJM",
   tagline: "Perusahaan pengangkut dan pengumpul limbah B3 berizin resmi, melayani Kalimantan dan sekitarnya",
   description:
-    "PT Kaltara Jaya Makmur (KJM313) adalah perusahaan pengangkutan dan pengumpulan limbah B3 (Bahan Berbahaya dan Beracun) yang berizin resmi dari Kementerian Lingkungan Hidup, Kementerian Perhubungan, dan Dinas Lingkungan Hidup. Berbasis di Tarakan, Kalimantan Utara, kami melayani pengangkutan dan pengumpulan limbah B3 untuk industri di Kalimantan dan sekitarnya.",
+    "PT Kaltara Jaya Makmur (PT KJM) adalah perusahaan pengangkutan dan pengumpulan limbah B3 (Bahan Berbahaya dan Beracun) yang berizin resmi dari Kementerian Lingkungan Hidup, Kementerian Perhubungan, dan Dinas Lingkungan Hidup. Berbasis di Tarakan, Kalimantan Utara, kami melayani pengangkutan dan pengumpulan limbah B3 untuk industri di Kalimantan dan sekitarnya.",
   address:
     "Jl. Rambutan No. 56, Kel. Kampung Empat, Kec. Tarakan Timur, Kota Tarakan, Kalimantan Utara",
   warehouse:

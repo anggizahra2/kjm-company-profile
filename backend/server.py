@@ -507,7 +507,7 @@ async def seed_content():
                 slug="pt-kaltara-jaya-makmur-perkuat-layanan-pengangkutan-limbah-b3",
                 category="Perusahaan",
                 excerpt="Komitmen kami melayani pengangkutan dan pengumpulan limbah B3 yang aman dan legal bagi industri di Kalimantan.",
-                content="PT Kaltara Jaya Makmur (KJM313) terus memperkuat layanan pengangkutan dan pengumpulan limbah B3 bagi industri di Kalimantan Utara, Kalimantan Timur, dan sekitarnya.\n\nDidukung izin rekomendasi dari KLHK, izin penyelenggaraan angkutan barang khusus dari Kementerian Perhubungan, serta perlindungan asuransi dari Jasindo, setiap pengangkutan kami jalankan dengan standar keselamatan tinggi.\n\nKami berterima kasih kepada seluruh klien dan mitra yang mempercayakan penanganan limbah B3 mereka kepada kami.",
+                content="PT Kaltara Jaya Makmur (KJM313) terus memperkuat layanan pengangkutan dan pengumpulan limbah B3 bagi industri di Kalimantan Utara, Kalimantan Timur, dan sekitarnya.\n\nDidukung izin rekomendasi dari KLHK, izin penyelenggaraan angkutan barang khusus dari Kementerian Perhubungan, serta perlindungan asuransi dari Bumida, setiap pengangkutan kami jalankan dengan standar keselamatan tinggi.\n\nKami berterima kasih kepada seluruh klien dan mitra yang mempercayakan penanganan limbah B3 mereka kepada kami.",
                 image=SEED_IMAGES["plant"],
             ),
             News(

@@ -85,7 +85,7 @@ export const PROFIL = {
     {
       kode: "KEPERCAYAAN",
       judul: "Terlindungi Asuransi",
-      deskripsi: "Setiap kegiatan penyelenggaraan pengelolaan limbah B3 kami dilindungi asuransi dari Jasindo.",
+      deskripsi: "Setiap kegiatan penyelenggaraan pengelolaan limbah B3 kami dilindungi asuransi dari Bumida.",
     },
   ],
 };

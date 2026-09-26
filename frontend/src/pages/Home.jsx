@@ -158,10 +158,10 @@ export default function Home() {
             data-testid="hero-subtext"
           >
             {t(
-              "adalah perusahaan pengangkut dan pengumpul limbah B3 berizin resmi — melayani pengangkutan dan pengelolaan limbah berbahaya dari hub kami di Tarakan dengan armada terpantau GPS.",
+              "adalah perusahaan pengangkut limbah B3 berizin resmi — melayani pengangkutan dan pengelolaan limbah berbahaya dari hub kami di Tarakan dengan armada terpantau GPS.",
               "is a fully licensed hazardous waste (B3) transporter and collector — serving industrial clients from our hub in Tarakan, North Kalimantan, with a GPS-tracked fleet."
             ) && `${COMPANY.name} ${t(
-              "adalah perusahaan pengangkut dan pengumpul limbah B3 berizin resmi — melayani pengangkutan dan pengelolaan limbah berbahaya dari hub kami di Tarakan dengan armada terpantau GPS.",
+              "adalah perusahaan pengangkut limbah B3 berizin resmi — melayani pengangkutan dan pengelolaan limbah berbahaya dari hub kami di Tarakan dengan armada terpantau GPS.",
               "is a fully licensed hazardous waste (B3) transporter and collector — serving industrial clients from our hub in Tarakan, North Kalimantan, with a GPS-tracked fleet."
             )}`}
           </motion.p>

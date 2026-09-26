@@ -41,7 +41,7 @@ export default function Berita() {
       <SEO
         title={t("Berita", "News")}
         description={t(
-          "Berita, kegiatan, dan perkembangan terbaru PT Kaltara Jaya Makmur — pengangkut dan pengumpul limbah B3 berizin di Kalimantan Utara.",
+          "Berita, kegiatan, dan perkembangan terbaru PT Kaltara Jaya Makmur — pengangkut limbah B3 berizin di Kalimantan Utara.",
           "News, activities, and updates from PT Kaltara Jaya Makmur — a licensed B3 waste transporter and collector in North Kalimantan."
         )}
         path="/berita"

@@ -5,7 +5,7 @@
 export const COMPANY = {
   name: "PT Kaltara Jaya Makmur",
   shortName: "KJM",
-  tagline: "Perusahaan pengangkut dan pengumpul limbah B3 berizin resmi, melayani Kalimantan dan sekitarnya",
+  tagline: "Perusahaan pengangkut limbah B3 berizin resmi, melayani Kalimantan dan sekitarnya",
   description:
     "PT Kaltara Jaya Makmur (PT KJM) adalah perusahaan pengangkutan dan pengelolaan limbah B3 (Bahan Berbahaya dan Beracun) yang berizin resmi dari Kementerian Lingkungan Hidup, Kementerian Perhubungan, dan Dinas Lingkungan Hidup. Berbasis di Tarakan, Kalimantan Utara, kami melayani pengangkutan dan pengelolaan limbah B3 untuk industri di Kalimantan dan sekitarnya.",
   address:

@@ -13,7 +13,7 @@ export default function Tentang() {
       <SEO
         title={t("Tentang Kami", "About Us")}
         description={t(
-          `Profil, visi, misi, dan nilai ${COMPANY.name} — perusahaan pengangkut dan pengumpul limbah B3 berizin di Tarakan, Kalimantan Utara.`,
+          `Profil, visi, misi, dan nilai ${COMPANY.name} — perusahaan pengangkut limbah B3 berizin di Tarakan, Kalimantan Utara.`,
           `Profile, vision, mission, and values of ${COMPANY.name} — a licensed B3 waste transporter and collector in Tarakan, North Kalimantan.`
         )}
         path="/tentang-kami"

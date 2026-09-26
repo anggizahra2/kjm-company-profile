@@ -99,7 +99,7 @@ export default function Home() {
     {
       icon: Recycle,
       judul: t("Pengelolaan Limbah B3", "B3 Waste Management"),
-      deskripsi: t("Pengumpulan dan penyimpanan sementara limbah B3 berizin di TPS kami di Tarakan.", "Licensed collection and temporary storage of B3 waste at our TPS facility in Tarakan."),
+      deskripsi: t("pengelolaan dan penyimpanan sementara limbah B3 berizin di TPS kami di Tarakan.", "Licensed collection and temporary storage of B3 waste at our TPS facility in Tarakan."),
       to: "/layanan#pengelolaan",
       id: "layanan-card-pengelolaan",
     },
@@ -158,10 +158,10 @@ export default function Home() {
             data-testid="hero-subtext"
           >
             {t(
-              "adalah perusahaan pengangkut dan pengumpul limbah B3 berizin resmi — melayani pengangkutan dan pengumpulan limbah berbahaya dari hub kami di Tarakan dengan armada terpantau GPS.",
+              "adalah perusahaan pengangkut dan pengumpul limbah B3 berizin resmi — melayani pengangkutan dan pengelolaan limbah berbahaya dari hub kami di Tarakan dengan armada terpantau GPS.",
               "is a fully licensed hazardous waste (B3) transporter and collector — serving industrial clients from our hub in Tarakan, North Kalimantan, with a GPS-tracked fleet."
             ) && `${COMPANY.name} ${t(
-              "adalah perusahaan pengangkut dan pengumpul limbah B3 berizin resmi — melayani pengangkutan dan pengumpulan limbah berbahaya dari hub kami di Tarakan dengan armada terpantau GPS.",
+              "adalah perusahaan pengangkut dan pengumpul limbah B3 berizin resmi — melayani pengangkutan dan pengelolaan limbah berbahaya dari hub kami di Tarakan dengan armada terpantau GPS.",
               "is a fully licensed hazardous waste (B3) transporter and collector — serving industrial clients from our hub in Tarakan, North Kalimantan, with a GPS-tracked fleet."
             )}`}
           </motion.p>
@@ -235,7 +235,7 @@ export default function Home() {
             <Reveal delay={0.15}>
               <p className="mt-6 text-base leading-relaxed text-slate-700">
                 {t(
-                  `Berdiri di Tarakan, Kalimantan Utara sejak 2015, ${COMPANY.name} melayani pengangkutan dan pengumpulan limbah B3 bagi industri di Kalimantan dan sekitarnya — didukung izin KLHK, Kemenhub, DLH, serta perlindungan asuransi BUMIDA untuk setiap pekerjaan.`,
+                  `Berdiri di Tarakan, Kalimantan Utara sejak 2015, ${COMPANY.name} melayani pengangkutan dan pengelolaan limbah B3 bagi industri di Kalimantan dan sekitarnya — didukung izin KLHK, Kemenhub, DLH, serta perlindungan asuransi BUMIDA untuk setiap pekerjaan.`,
                   `Established in Tarakan, North Kalimantan in 2015, ${COMPANY.name} provides B3 waste transport and collection services for industries across Kalimantan and beyond — backed by KLHK, Ministry of Transportation, and DLH licenses, plus BUMIDA insurance on every job.`
                 )}
               </p>

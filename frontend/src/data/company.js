@@ -7,7 +7,7 @@ export const COMPANY = {
   shortName: "KJM",
   tagline: "Perusahaan pengangkut dan pengumpul limbah B3 berizin resmi, melayani Kalimantan dan sekitarnya",
   description:
-    "PT Kaltara Jaya Makmur (PT KJM) adalah perusahaan pengangkutan dan pengumpulan limbah B3 (Bahan Berbahaya dan Beracun) yang berizin resmi dari Kementerian Lingkungan Hidup, Kementerian Perhubungan, dan Dinas Lingkungan Hidup. Berbasis di Tarakan, Kalimantan Utara, kami melayani pengangkutan dan pengumpulan limbah B3 untuk industri di Kalimantan dan sekitarnya.",
+    "PT Kaltara Jaya Makmur (PT KJM) adalah perusahaan pengangkutan dan pengelolaan limbah B3 (Bahan Berbahaya dan Beracun) yang berizin resmi dari Kementerian Lingkungan Hidup, Kementerian Perhubungan, dan Dinas Lingkungan Hidup. Berbasis di Tarakan, Kalimantan Utara, kami melayani pengangkutan dan pengelolaan limbah B3 untuk industri di Kalimantan dan sekitarnya.",
   address:
     "Jl. Rambutan No. 56, Kel. Kampung Empat, Kec. Tarakan Timur, Kota Tarakan, Kalimantan Utara",
   warehouse:
@@ -17,7 +17,7 @@ export const COMPANY = {
   hours: "Senin – Sabtu, 08.30 – 16.30 WITA",
   whatsapp: "6282136455038",
   whatsappMessage:
-    "Halo PT Kaltara Jaya Makmur, saya ingin berkonsultasi mengenai layanan pengangkutan / pengumpulan limbah B3.",
+    "Halo PT Kaltara Jaya Makmur, saya ingin berkonsultasi mengenai layanan pengangkutan / pengelolaan limbah B3.",
   socials: {
     instagram: "https://www.instagram.com/ptkjm313",
     linkedin: "",
@@ -37,7 +37,7 @@ export const STATS = [
 export const MARQUEE_ITEMS = [
   "Izin Rekomendasi KLHK",
   "Izin Angkutan Kemenhub",
-  "Izin Pengumpulan DLH",
+  "Izin pengelolaan DLH",
   "Berasuransi BUMIDA",
   "NIB 9120002391939",
   "Armada GPS Real-Time",
@@ -55,7 +55,7 @@ export const HERO_IMAGES = {
 
 export const PROFIL = {
   sejarah: [
-    "PT. Kaltara Jaya Makmur merupakan perusahaan swasta yang telah berdiri sejak tahun 2015 dan bergerak di bidang Waste Service, dengan fokus pada layanan pengelolaan Limbah B3 (Bahan Berbahaya dan Beracun), khususnya dalam kegiatan pengangkutan (Transportir) dan pengumpulan Limbah B3.",
+    "PT. Kaltara Jaya Makmur merupakan perusahaan swasta yang telah berdiri sejak tahun 2015 dan bergerak di bidang Waste Service, dengan fokus pada layanan pengelolaan Limbah B3 (Bahan Berbahaya dan Beracun), khususnya dalam kegiatan pengangkutan (Transportir) dan pengelolaan Limbah B3.",
     "Dengan pengalaman dan komitmen yang terus dikembangkan, kami hadir untuk memberikan layanan pengelolaan Limbah B3 yang profesional, bertanggung jawab, dan berorientasi pada kepatuhan terhadap ketentuan lingkungan hidup. Kami berkomitmen untuk mendukung setiap mitra dalam mewujudkan pengelolaan Limbah B3 yang aman dan tepat, sekaligus berkontribusi dalam menjaga kelestarian lingkungan.",
     "Bagi kami, keberhasilan bukan hanya tentang memberikan pelayanan, tetapi juga tentang membangun kepercayaan dan hubungan kerja sama jangka panjang dengan setiap mitra. Oleh karena itu, kami senantiasa mengutamakan kualitas pelayanan, kepuasan pelanggan, serta tanggung jawab terhadap lingkungan dalam setiap kegiatan operasional.",
   ],
@@ -179,8 +179,8 @@ export const LEGALITAS_TEKNIS = [
     berlaku: "Dokumen Aktif",
   },
   {
-    nomor: "Izin Pengumpulan Limbah B3",
-    nama: "Izin Pengumpulan Limbah B3",
+    nomor: "Izin pengelolaan Limbah B3",
+    nama: "Izin pengelolaan Limbah B3",
     penerbit: "Dinas Lingkungan Hidup",
     berlaku: "Dokumen Aktif",
   },
@@ -294,7 +294,7 @@ export const ALUR_PENGANGKUTAN = [
 ];
 
 export const PENGELOLAAN = [
-  { judul: "Pengumpulan Limbah B3", deskripsi: "Pengumpulan limbah B3 dari lokasi klien dengan izin resmi dari Dinas Lingkungan Hidup." },
+  { judul: "pengelolaan Limbah B3", deskripsi: "pengelolaan limbah B3 dari lokasi klien dengan izin resmi dari Dinas Lingkungan Hidup." },
   { judul: "Penyimpanan Sementara (TPS)", deskripsi: "Pool armada dan Tempat Penyimpanan Sementara di Tarakan Timur dengan penanganan sesuai standar." },
   { judul: "Pengangkutan Berizin", deskripsi: "Pengangkutan limbah B3 dengan izin Kementerian Lingkungan Hidup dan Kementerian Perhubungan." },
   { judul: "Perlindungan Asuransi", deskripsi: "Seluruh kegiatan penyelenggaraan dilindungi Asuransi Pengelolaan Limbah B3 dari BUMIDA." },

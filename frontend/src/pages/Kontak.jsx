@@ -40,7 +40,7 @@ export default function Kontak() {
       <SEO
         title={t("Hubungi Kami", "Contact Us")}
         description={t(
-          `Hubungi ${COMPANY.name} untuk konsultasi pengangkutan dan pengumpulan limbah B3. WhatsApp, telepon, email, atau formulir kontak.`,
+          `Hubungi ${COMPANY.name} untuk konsultasi pengangkutan dan pengelolaan limbah B3. WhatsApp, telepon, email, atau formulir kontak.`,
           `Contact ${COMPANY.name} for B3 waste transport and collection inquiries. WhatsApp, phone, email, or contact form.`
         )}
         path="/kontak"

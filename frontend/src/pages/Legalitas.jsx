@@ -23,7 +23,7 @@ export default function Legalitas() {
       <SEO
         title={t("Legalitas & Perizinan", "Legality & Permits")}
         description={t(
-          `Dokumen legalitas ${COMPANY.name}: izin rekomendasi KLHK, izin angkutan barang khusus Kemenhub, izin pengumpulan DLH, dan asuransi BUMIDA.`,
+          `Dokumen legalitas ${COMPANY.name}: izin rekomendasi KLHK, izin angkutan barang khusus Kemenhub, izin pengelolaan DLH, dan asuransi BUMIDA.`,
           `Legal documents of ${COMPANY.name}: KLHK recommendation permits, Ministry of Transportation special goods license, DLH collection license, and BUMIDA insurance.`
         )}
         path="/legalitas"

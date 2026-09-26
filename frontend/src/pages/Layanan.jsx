@@ -15,7 +15,7 @@ export default function Layanan() {
       <SEO
         title={t("Armada & Layanan", "Fleet & Services")}
         description={t(
-          "Armada pengangkut limbah B3 berizin Kemenhub, wilayah layanan seluruh Kalimantan Utara, serta layanan pengangkutan dan pengumpulan limbah B3 terpadu.",
+          "Armada pengangkut limbah B3 berizin Kemenhub, wilayah layanan seluruh Kalimantan Utara, serta layanan pengangkutan dan pengelolaan limbah B3 terpadu.",
           "Ministry-licensed B3 waste transport fleet, coverage across North Kalimantan, and integrated B3 waste transport and collection services."
         )}
         path="/layanan"
@@ -132,7 +132,7 @@ export default function Layanan() {
                 <span className="inline-flex items-center gap-2"><Recycle className="w-4 h-4" /> {t("Pengelolaan Limbah B3", "B3 Waste Management")}</span>
               </SectionLabel>
               <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-brand-950 mb-10">
-                {t("Dari Pengumpulan Hingga Penyimpanan yang Aman", "From Collection to Safe Storage")}
+                {t("Dari pengelolaan Hingga Penyimpanan yang Aman", "From Collection to Safe Storage")}
               </h2>
             </Reveal>
             <div className="space-y-5">

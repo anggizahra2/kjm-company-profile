@@ -82,7 +82,7 @@ export const LEGALITAS_TEKNIS = [
   { nomor: "B.115/G-G.4/PLB.5.3/03/2026", nama: "KLHK Recommendation Permit", penerbit: "Ministry of Environment and Forestry (KLHK)", berlaku: "Active Document" },
   { nomor: "Izin Penyelenggaraan Angkutan Barang Khusus", nama: "Special Goods Transport License for B3 Waste", penerbit: "Ministry of Transportation", berlaku: "Active Document" },
   { nomor: "Izin Pengangkutan Limbah B3", nama: "B3 Waste Transportation License", penerbit: "Ministry of Environment", berlaku: "Active Document" },
-  { nomor: "Izin Pengumpulan Limbah B3", nama: "B3 Waste Collection License", penerbit: "Environmental Agency (DLH)", berlaku: "Active Document" },
+  { nomor: "Izin pengelolaan Limbah B3", nama: "B3 Waste Collection License", penerbit: "Environmental Agency (DLH)", berlaku: "Active Document" },
   { nomor: "Polis Asuransi Limbah B3", nama: "B3 Waste Management Operations Insurance", penerbit: "PT Asuransi Umum Bumida 1967 (BUMIDA)", berlaku: "Active Document" },
 ];
 

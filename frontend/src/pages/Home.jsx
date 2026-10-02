@@ -37,6 +37,8 @@ const HeroSlideshow = ({ y, alt }) => {
           key={src}
           src={src}
           alt={i === 0 ? alt : ""}
+          loading={i === 0 ? "eager" : "lazy"}
+          fetchpriority={i === 0 ? "high" : "low"}
           initial={false}
           animate={{ opacity: i === idx ? 0.4 : 0 }}
           transition={{ duration: 1.4, ease: "easeInOut" }}

@@ -31,7 +31,14 @@ export default function BeritaDetail() {
   }
 
   if (!item) {
-    return <div className="py-32 text-center text-sm text-slate-500" data-testid="news-detail-loading">{t("Memuat berita…", "Loading article…")}</div>;
+    return (
+      <>
+        <SEO title={slug.replace(/-/g, " ")} path={`/berita/${slug}`} type="article" />
+        <div className="py-32 text-center text-sm text-slate-500" data-testid="news-detail-loading">
+          {t("Memuat berita…", "Loading article…")}
+        </div>
+      </>
+    );
   }
 
   return (

@@ -1,4 +1,4 @@
--static="true"import { useEffect } from "react";
+import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { COMPANY } from "@/data/company";
 

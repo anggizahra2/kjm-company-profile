@@ -1,14 +1,27 @@
+-static="true"import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { COMPANY } from "@/data/company";
 
+// Domain utama (apex). Canonical selalu memakai ini, walau halaman dibuka lewat www / preview.
+const SITE_URL = "https://kaltarajayamakmur.co.id";
+
 export const SEO = ({ title, description, path = "/", type = "website", image }) => {
-  const origin = typeof window !== "undefined" ? window.location.origin : "";
-  const url = `${origin}${path}`;
+  // Hapus tag SEO statis dari index.html / middleware setelah React jalan.
+  // Helmet memasang tag yang sama di bawah, jadi tidak ada tag ganda.
+  useEffect(() => {
+    document.head.querySelectorAll("[data-seo-static]").forEach((el) => el.remove());
+  }, []);
+
+  const url = `${SITE_URL}${path}`;
   const fullTitle = title
     ? `${title} | ${COMPANY.name}`
     : `${COMPANY.name} — Pengangkutan & Pengelolaan Limbah B3 Berizin KLHK`;
   const desc = description || COMPANY.description;
-  const ogImage = image || `${origin}/images/hero-armada.webp`;
+  const ogImage = image
+    ? image.startsWith("http")
+      ? image
+      : `${SITE_URL}${image.startsWith("/") ? "" : "/"}${image}`
+    : `${SITE_URL}/images/hero-armada.webp`;
 
   return (
     <Helmet>

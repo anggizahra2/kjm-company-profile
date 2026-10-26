@@ -13,10 +13,21 @@ export default function BeritaDetail() {
   const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
-    api
-      .get(`/news/${slug}`)
-      .then(({ data }) => setItem(data))
-      .catch(() => setNotFound(true));
+    let cancelled = false;
+    let attempt = 0;
+    const load = () => {
+      api
+        .get(`/news/${slug}`)
+        .then(({ data }) => { if (!cancelled) setItem(data); })
+        .catch((err) => {
+          if (cancelled) return;
+          if (err?.response?.status === 404) { setNotFound(true); return; }
+          if (attempt < 3) { attempt += 1; setTimeout(load, 2000 * attempt); }
+          else setNotFound(true);
+        });
+    };
+    load();
+    return () => { cancelled = true; };
   }, [slug]);
 
   if (notFound) {
